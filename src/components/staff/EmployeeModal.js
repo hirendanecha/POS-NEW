@@ -301,7 +301,7 @@ export default function EmployeeModal({ visible, onClose, employee }) {
                         styles.permissionItem,
                         isDefault && {
                           opacity: 0.6,
-                          backgroundColor: "#f8fafc",
+                          backgroundColor: ThemeColors.bg,
                         },
                       ]}
                       onPress={() => {
@@ -312,10 +312,10 @@ export default function EmployeeModal({ visible, onClose, employee }) {
                       {isChecked ? (
                         <CheckSquare
                           size={18}
-                          color={isDefault ? "#94A3B8" : "#0066FF"}
+                          color={isDefault ? ThemeColors.textMuted : ThemeColors.blue}
                         />
                       ) : (
-                        <Square size={18} color="#94A3B8" />
+                        <Square size={18} color={ThemeColors.textMuted} />
                       )}
                       <Text
                         style={[
@@ -364,7 +364,7 @@ export default function EmployeeModal({ visible, onClose, employee }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor: ThemeColors.black + "66",
     justifyContent: "flex-end",
   },
   overlayCenter: {
@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.xl,
   },
   modalContainer: {
-    backgroundColor: "#F0F2F5",
+    backgroundColor: ThemeColors.bg,
     borderTopLeftRadius: ThemeRadius.xl,
     borderTopRightRadius: ThemeRadius.xl,
     height: "90%",
@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
     maxWidth: 640,
     height: "auto",
     maxHeight: "90%",
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
   },
   header: {
     flexDirection: "row",
@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
   },
   closeBtn: {
     padding: 6,
-    backgroundColor: ThemeColors.bg,
+    backgroundColor: ThemeColors.white + "80",
     borderRadius: ThemeRadius.full,
     borderWidth: 1,
     borderColor: ThemeColors.border,
@@ -478,14 +478,16 @@ const styles = StyleSheet.create({
     borderRadius: ThemeRadius.md,
   },
   cancelBtn: {
-    backgroundColor: "#9370F6",
+    backgroundColor: ThemeColors.bg,
+    borderWidth: 1,
+    borderColor: ThemeColors.border,
   },
   cancelBtnText: {
     fontSize: 14,
-    color: ThemeColors.white,
+    color: ThemeColors.textSecondary,
   },
   saveBtn: {
-    backgroundColor: "#7B51ED",
+    backgroundColor: ThemeColors.primary,
   },
   saveBtnText: {
     fontSize: 14,

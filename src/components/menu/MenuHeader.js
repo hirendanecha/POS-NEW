@@ -1,21 +1,16 @@
 import { CommonHeader } from "@/components/common/CommonHeader";
 import { SearchWithFilter } from "@/components/ui/SearchWithFilter";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeSpacing } from "@/theme/theme";
 import { StyleSheet, View } from "react-native";
 // Removed FILTER_TABS as filtering is now handled by the sidebar
 
 export function MenuHeader({
-  isDesktop,
-  isSelectMode,
-  setIsSelectMode,
-  setSelectedIds,
   searchQuery,
   setSearchQuery,
   handleBarcodeScan,
   filterOptions,
   activeFilter,
   onFilterChange,
-  onNewPress,
 }) {
   return (
     <CommonHeader
@@ -38,18 +33,6 @@ export function MenuHeader({
 }
 
 const styles = StyleSheet.create({
-  btnPrimary: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: ThemeColors.emerald,
-    paddingHorizontal: ThemeSpacing.lg,
-    paddingVertical: ThemeSpacing.sm,
-    borderRadius: ThemeRadius.md,
-  },
-  btnPrimaryText: {
-    color: ThemeColors.white,
-    fontSize: 14,
-  },
   toolbarRow: {
     flexDirection: "row",
     alignItems: "center",

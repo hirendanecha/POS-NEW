@@ -1,4 +1,3 @@
-import { BulkActionModal } from "@/components/menu/BulkActionModal";
 import { MenuEmptyState } from "@/components/menu/MenuEmptyState";
 import { MenuHeader } from "@/components/menu/MenuHeader";
 import { MenuItemCard } from "@/components/menu/MenuItemCard";
@@ -17,14 +16,14 @@ import { useNavigation } from "expo-router";
 import { CheckSquare, ChevronDown, ChevronUp, Plus } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Alert,
   Platform,
+  RefreshControl,
   SectionList,
   StyleSheet,
   TouchableOpacity,
   View,
-  ActivityIndicator,
-  RefreshControl,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -34,8 +33,6 @@ export default function MenuScreen() {
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
   const [isWizardVisible, setIsWizardVisible] = useState(false);
-  const [isBulkModalVisible, setIsBulkModalVisible] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
   const [editingMenuItem, setEditingMenuItem] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [collapsedSections, setCollapsedSections] = useState(() => {
@@ -57,9 +54,11 @@ export default function MenuScreen() {
 
   const branchId = activeBranch;
 
-  const { items: menuItems = [], categories = [], isLoading } = useSelector(
-    (state) => state.menu,
-  );
+  const {
+    items: menuItems = [],
+    categories = [],
+    isLoading,
+  } = useSelector((state) => state.menu);
 
   useEffect(() => {
     if (branchId) {
@@ -134,8 +133,6 @@ export default function MenuScreen() {
       setSelectedIds((prev) =>
         prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
       );
-    } else {
-      setSelectedMenuItem(menuItem);
     }
   };
 
@@ -228,7 +225,9 @@ export default function MenuScreen() {
         ) : (
           <SectionList
             sections={sections}
-            keyExtractor={(item, index) => (item[0]?._id || item[0]?.id) + index}
+            keyExtractor={(item, index) =>
+              (item[0]?._id || item[0]?.id) + index
+            }
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
             refreshControl={
@@ -298,7 +297,10 @@ export default function MenuScreen() {
                           pointerEvents="none"
                         >
                           {selectedIds.includes(itemId) && (
-                            <CheckSquare size={24} color={ThemeColors.emerald} />
+                            <CheckSquare
+                              size={24}
+                              color={ThemeColors.emerald}
+                            />
                           )}
                         </View>
                       )}
@@ -310,33 +312,6 @@ export default function MenuScreen() {
           />
         )}
       </View>
-
-      {isSelectMode && selectedIds.length > 0 && (
-        <View style={styles.bulkActionBar}>
-          <Text weight="bold" style={styles.bulkActionText}>
-            {selectedIds.length} item{selectedIds.length > 1 ? "s" : ""}{" "}
-            selected
-          </Text>
-          <TouchableOpacity
-            style={styles.btnPrimary}
-            onPress={() => setIsBulkModalVisible(true)}
-          >
-            <Text weight="bold" style={styles.btnPrimaryText}>
-              Bulk Edit
-            </Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      <BulkActionModal
-        visible={isBulkModalVisible}
-        onClose={() => setIsBulkModalVisible(false)}
-        selectedIds={selectedIds}
-        onClearSelection={() => {
-          setSelectedIds([]);
-          setIsSelectMode(false);
-        }}
-      />
 
       <TouchableOpacity
         style={styles.fab}
@@ -374,7 +349,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: ThemeColors.borderSubtle,
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
@@ -413,7 +388,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(255,255,255,0.6)",
+    backgroundColor: ThemeColors.white + "99",
     borderRadius: ThemeRadius.lg,
     justifyContent: "center",
     alignItems: "center",

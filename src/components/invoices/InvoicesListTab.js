@@ -186,7 +186,11 @@ export function InvoicesListTab({
           weight="bold"
           style={[
             styles.tableCell,
-            { textAlign: "right", fontSize: 16, color: ThemeColors.emerald },
+            {
+              textAlign: "right",
+              fontSize: 16,
+              color: ThemeColors.textPrimary,
+            },
           ]}
         >
           ₹{inv.grandTotal.toFixed(2)}
@@ -287,9 +291,7 @@ export function InvoicesListTab({
           >
             <List
               size={18}
-              color={
-                isListView ? ThemeColors.emerald : ThemeColors.textSecondary
-              }
+              color={isListView ? ThemeColors.amber : ThemeColors.textSecondary}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -302,7 +304,7 @@ export function InvoicesListTab({
             <LayoutGrid
               size={18}
               color={
-                !isListView ? ThemeColors.emerald : ThemeColors.textSecondary
+                !isListView ? ThemeColors.amber : ThemeColors.textSecondary
               }
             />
           </TouchableOpacity>
@@ -349,12 +351,12 @@ export function InvoicesListTab({
 
             {(() => {
               const pages = [];
-              let startPage = Math.max(1, currentPage - 2);
-              let endPage = Math.min(totalPages, currentPage + 2);
+              let startPage = Math.max(1, currentPage - 1);
+              let endPage = Math.min(totalPages, currentPage + 1);
 
-              if (currentPage <= 3) endPage = Math.min(5, totalPages);
-              if (currentPage >= totalPages - 2)
-                startPage = Math.max(1, totalPages - 4);
+              if (currentPage <= 2) endPage = Math.min(3, totalPages);
+              if (currentPage >= totalPages - 1)
+                startPage = Math.max(1, totalPages - 2);
 
               if (startPage > 1) {
                 pages.push(
@@ -464,7 +466,7 @@ const styles = StyleSheet.create({
   searchWrap: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     borderRadius: ThemeRadius.full,
     paddingHorizontal: ThemeSpacing.xl,
     height: 48,
@@ -473,9 +475,11 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+    borderWidth: 1,
+    borderColor: ThemeColors.border,
   },
   searchIcon: {
     marginRight: ThemeSpacing.md,
@@ -488,14 +492,16 @@ const styles = StyleSheet.create({
   },
   viewToggleWrap: {
     flexDirection: "row",
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     borderRadius: ThemeRadius.full,
     padding: 4,
     shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+    borderWidth: 1,
+    borderColor: ThemeColors.border,
   },
   viewToggleBtn: {
     paddingHorizontal: ThemeSpacing.xl,
@@ -503,17 +509,17 @@ const styles = StyleSheet.create({
     borderRadius: ThemeRadius.full,
   },
   viewToggleBtnActive: {
-    backgroundColor: ThemeColors.emerald + "15",
+    backgroundColor: ThemeColors.amber + "15",
   },
   card: {
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     padding: ThemeSpacing.lg,
     shadowColor: ThemeColors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
     borderWidth: 1,
     borderColor: ThemeColors.border,
   },
@@ -545,15 +551,16 @@ const styles = StyleSheet.create({
   },
   tableContainer: {
     width: "100%",
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.xl,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
     shadowColor: ThemeColors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.03,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+    overflow: "hidden",
   },
   tableHeader: {
     flexDirection: "row",
@@ -670,7 +677,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   pageNumberBtnActive: {
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
   },
   pageNumberText: {
     fontSize: 14,

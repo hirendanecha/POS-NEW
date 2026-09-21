@@ -1,19 +1,28 @@
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import { Text } from '@/components/ui/Text';
-import { ThemeColors, ThemeSpacing, ThemeRadius } from '@/theme/theme';
-import { X, Package, AlertCircle } from 'lucide-react-native';
-import { useResponsive } from '@/hooks/useResponsive';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchInventoryItemById, clearSelectedItem } from '@/store/slices/inventorySlice';
-import { ActivityIndicator } from 'react-native';
 import { Loader } from "@/components/common/Loader";
+import { Text } from "@/components/ui/Text";
+import { useResponsive } from "@/hooks/useResponsive";
+import {
+  clearSelectedItem,
+  fetchInventoryItemById,
+} from "@/store/slices/inventorySlice";
+import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { AlertCircle, Package, X } from "lucide-react-native";
+import { useEffect } from "react";
+import {
+  ActivityIndicator,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 export function ProductInventoryModal({ product, visible, onClose }) {
   const { isMobile } = useResponsive();
   const dispatch = useDispatch();
-  const { selectedItem, isItemLoading } = useSelector(state => state.inventory);
+  const { selectedItem, isItemLoading } = useSelector(
+    (state) => state.inventory,
+  );
 
   useEffect(() => {
     if (visible && product?.id) {
@@ -29,19 +38,34 @@ export function ProductInventoryModal({ product, visible, onClose }) {
   if (!visible || !displayProduct) return null;
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onClose}
+    >
       <View style={[styles.overlay, styles.overlayCenter]}>
-        <View style={[styles.modalContainerCentered, { 
-            padding: isMobile ? ThemeSpacing.lg : ThemeSpacing.xxl, 
-            width: isMobile ? '95%' : '100%', 
-            maxWidth: 600, 
-            backgroundColor: ThemeColors.surface, 
-            borderRadius: ThemeRadius.xl 
-          }]}
+        <View
+          style={[
+            styles.modalContainerCentered,
+            {
+              padding: isMobile ? ThemeSpacing.lg : ThemeSpacing.xxl,
+              width: isMobile ? "95%" : "100%",
+              maxWidth: 600,
+              backgroundColor: ThemeColors.white,
+              borderRadius: 16,
+            },
+          ]}
         >
           {/* Header */}
           <View style={styles.header}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: ThemeSpacing.md }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: ThemeSpacing.md,
+              }}
+            >
               <View style={styles.iconBox}>
                 <Package size={24} color={ThemeColors.blue} />
               </View>
@@ -50,8 +74,12 @@ export function ProductInventoryModal({ product, visible, onClose }) {
                   <ActivityIndicator size="small" color={ThemeColors.primary} />
                 ) : (
                   <>
-                    <Text weight="bold" style={styles.title}>{displayProduct.name}</Text>
-                    <Text style={styles.subtitle}>{displayProduct.sku} • {displayProduct.category}</Text>
+                    <Text weight="bold" style={styles.title}>
+                      {displayProduct.name}
+                    </Text>
+                    <Text style={styles.subtitle}>
+                      {displayProduct.sku} • {displayProduct.category}
+                    </Text>
                   </>
                 )}
               </View>
@@ -63,62 +91,103 @@ export function ProductInventoryModal({ product, visible, onClose }) {
 
           {/* Quick Stats */}
           {isItemLoading && !selectedItem ? (
-             <View style={{ padding: ThemeSpacing.xl, alignItems: 'center' }}>
-               <Loader />
-             </View>
+            <View style={{ padding: ThemeSpacing.xl, alignItems: "center" }}>
+              <Loader />
+            </View>
           ) : (
             <>
               <View style={styles.statsRow}>
                 <View style={styles.statBox}>
                   <Text style={styles.statLabel}>Available</Text>
-                  <Text weight="bold" style={styles.statValue}>{displayProduct.in_stock ?? displayProduct.inStock} {displayProduct.unit}</Text>
+                  <Text weight="bold" style={styles.statValue}>
+                    {displayProduct.in_stock ?? displayProduct.inStock}{" "}
+                    {displayProduct.unit}
+                  </Text>
                 </View>
                 <View style={styles.statBox}>
                   <Text style={styles.statLabel}>Reserved</Text>
-                  <Text weight="bold" style={styles.statValue}>{displayProduct.reserved} {displayProduct.unit}</Text>
+                  <Text weight="bold" style={styles.statValue}>
+                    {displayProduct.reserved} {displayProduct.unit}
+                  </Text>
                 </View>
                 <View style={styles.statBox}>
                   <Text style={styles.statLabel}>Reorder Level</Text>
-                  <Text weight="bold" style={styles.statValue}>{displayProduct.reorder_level ?? displayProduct.reorderLevel} {displayProduct.unit}</Text>
+                  <Text weight="bold" style={styles.statValue}>
+                    {displayProduct.reorder_level ??
+                      displayProduct.reorderLevel}{" "}
+                    {displayProduct.unit}
+                  </Text>
                 </View>
               </View>
 
-          {/* Detailed Info */}
-          <View style={styles.detailsSection}>
-            <Text weight="bold" style={{ fontSize: 16, marginBottom: ThemeSpacing.md }}>Valuation & Status</Text>
-            
-            <View style={styles.infoRow}>
-              <Text style={styles.infoLabel}>Cost Price</Text>
-              <Text style={styles.infoValue}>₹{displayProduct.price}</Text>
-            </View>
-            
-            <View style={styles.infoRow}>
-              <Text style={styles.infoLabel}>Total Value</Text>
-              <Text style={styles.infoValue}>₹{((displayProduct.in_stock ?? displayProduct.inStock) * displayProduct.price).toLocaleString()}</Text>
-            </View>
-            
-            <View style={styles.infoRow}>
-              <Text style={styles.infoLabel}>Status</Text>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                {displayProduct.status === 'Low' || displayProduct.status === 'Critical' ? (
-                  <AlertCircle size={14} color={ThemeColors.rose} />
-                ) : null}
-                <Text style={[styles.infoValue, { 
-                  color: displayProduct.status === 'Normal' ? ThemeColors.emerald : ThemeColors.rose 
-                }]}>
-                  {displayProduct.status}
+              {/* Detailed Info */}
+              <View style={styles.detailsSection}>
+                <Text
+                  weight="bold"
+                  style={{ fontSize: 16, marginBottom: ThemeSpacing.md }}
+                >
+                  Valuation & Status
                 </Text>
+
+                <View style={styles.infoRow}>
+                  <Text style={styles.infoLabel}>Cost Price</Text>
+                  <Text style={styles.infoValue}>₹{displayProduct.price}</Text>
+                </View>
+
+                <View style={styles.infoRow}>
+                  <Text style={styles.infoLabel}>Total Value</Text>
+                  <Text style={styles.infoValue}>
+                    ₹
+                    {(
+                      (displayProduct.in_stock ?? displayProduct.inStock) *
+                      displayProduct.price
+                    ).toLocaleString()}
+                  </Text>
+                </View>
+
+                <View style={styles.infoRow}>
+                  <Text style={styles.infoLabel}>Status</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 4,
+                    }}
+                  >
+                    {displayProduct.status === "Low" ||
+                    displayProduct.status === "Critical" ? (
+                      <AlertCircle size={14} color={ThemeColors.rose} />
+                    ) : null}
+                    <Text
+                      style={[
+                        styles.infoValue,
+                        {
+                          color:
+                            displayProduct.status === "Normal"
+                              ? ThemeColors.amber
+                              : ThemeColors.rose,
+                        },
+                      ]}
+                    >
+                      {displayProduct.status}
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={styles.infoRow}>
+                  <Text style={styles.infoLabel}>Last Counted</Text>
+                  <Text style={styles.infoValue}>
+                    {displayProduct.lastCounted || displayProduct.updated_at
+                      ? new Date(
+                          displayProduct.updated_at ||
+                            displayProduct.lastCounted,
+                        ).toLocaleDateString()
+                      : "N/A"}
+                  </Text>
+                </View>
               </View>
-            </View>
-            
-            <View style={styles.infoRow}>
-              <Text style={styles.infoLabel}>Last Counted</Text>
-              <Text style={styles.infoValue}>{displayProduct.lastCounted || displayProduct.updated_at ? new Date(displayProduct.updated_at || displayProduct.lastCounted).toLocaleDateString() : 'N/A'}</Text>
-            </View>
-          </View>
             </>
           )}
-
         </View>
       </View>
     </Modal>
@@ -128,29 +197,29 @@ export function ProductInventoryModal({ product, visible, onClose }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: ThemeColors.black + "80",
   },
   overlayCenter: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalContainerCentered: {
-    width: '90%',
-    maxHeight: '90%',
+    width: "90%",
+    maxHeight: "90%",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
     marginBottom: ThemeSpacing.xl,
   },
   iconBox: {
     width: 48,
     height: 48,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.blue + '15',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: ThemeColors.blue + "15",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 20,
@@ -165,7 +234,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   statsRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: ThemeSpacing.md,
     marginBottom: ThemeSpacing.xl,
   },
@@ -194,9 +263,9 @@ const styles = StyleSheet.create({
     borderColor: ThemeColors.border,
   },
   infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: ThemeColors.borderSubtle,
@@ -208,6 +277,6 @@ const styles = StyleSheet.create({
   infoValue: {
     fontSize: 14,
     color: ThemeColors.textPrimary,
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });

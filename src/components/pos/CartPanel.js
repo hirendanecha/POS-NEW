@@ -1267,7 +1267,7 @@ const styles = StyleSheet.create({
   },
   tooltipOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: ThemeColors.black + "33",
     justifyContent: "flex-end",
     alignItems: "flex-end",
     padding: ThemeSpacing.lg,

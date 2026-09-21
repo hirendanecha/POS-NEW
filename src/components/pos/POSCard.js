@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 6, // Thick color bar at the top for instant visual recognition
     borderColor: ThemeColors.border,
     minHeight: 100,
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 3,

@@ -4,13 +4,13 @@ import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
 import { Check, X } from "lucide-react-native";
 import { useState } from "react";
 import {
+  ActivityIndicator,
   Modal,
   ScrollView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -106,32 +106,34 @@ export function SupplierFormModal({ visible, onClose }) {
         contracts: {},
         communications: [],
       }),
-    ).then(() => {
-      // Reset and close
-      setFormData({
-        name: "",
-        businessName: "",
-        category: "Manufacturer",
-        regNumber: "",
-        contactPerson: "",
-        mobile: "",
-        officeNumber: "",
-        email: "",
-        website: "",
-        gst: "",
-        addressLine1: "",
-        city: "",
-        state: "",
-        zip: "",
-        country: "",
-        paymentTerms: "",
-        creditLimit: "",
+    )
+      .then(() => {
+        // Reset and close
+        setFormData({
+          name: "",
+          businessName: "",
+          category: "Manufacturer",
+          regNumber: "",
+          contactPerson: "",
+          mobile: "",
+          officeNumber: "",
+          email: "",
+          website: "",
+          gst: "",
+          addressLine1: "",
+          city: "",
+          state: "",
+          zip: "",
+          country: "",
+          paymentTerms: "",
+          creditLimit: "",
+        });
+        setIsSubmitting(false);
+        onClose();
+      })
+      .catch(() => {
+        setIsSubmitting(false);
       });
-      setIsSubmitting(false);
-      onClose();
-    }).catch(() => {
-      setIsSubmitting(false);
-    });
   };
 
   const categories = [
@@ -164,7 +166,13 @@ export function SupplierFormModal({ visible, onClose }) {
             contentContainerStyle={{ paddingBottom: ThemeSpacing.xxl }}
           >
             {error ? (
-              <Text style={{ color: ThemeColors.error, marginBottom: 12, fontSize: 14 }}>
+              <Text
+                style={{
+                  color: ThemeColors.error,
+                  marginBottom: 12,
+                  fontSize: 14,
+                }}
+              >
                 {error}
               </Text>
             ) : null}
@@ -377,17 +385,17 @@ export function SupplierFormModal({ visible, onClose }) {
             <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
               <Text style={{ color: ThemeColors.textSecondary }}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.saveBtn, isSubmitting && { opacity: 0.7 }]} 
+            <TouchableOpacity
+              style={[styles.saveBtn, isSubmitting && { opacity: 0.7 }]}
               onPress={handleSubmit}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                <ActivityIndicator size="small" color={ThemeColors.surface} />
+                <ActivityIndicator size="small" color={ThemeColors.white} />
               ) : (
-                <Check size={18} color={ThemeColors.surface} />
+                <Check size={18} color={ThemeColors.white} />
               )}
-              <Text weight="bold" style={{ color: ThemeColors.surface }}>
+              <Text weight="bold" style={{ color: ThemeColors.white }}>
                 {isSubmitting ? "Saving..." : "Save Supplier"}
               </Text>
             </TouchableOpacity>
@@ -401,7 +409,7 @@ export function SupplierFormModal({ visible, onClose }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: ThemeColors.black + "99",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.xl,
@@ -409,8 +417,8 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: "100%",
     maxWidth: 700,
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white,
+    borderRadius: 16,
     maxHeight: "90%",
     overflow: "hidden",
   },
@@ -473,7 +481,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: ThemeSpacing.sm,
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
     paddingHorizontal: ThemeSpacing.xl,
     paddingVertical: ThemeSpacing.md,
     borderRadius: ThemeRadius.md,

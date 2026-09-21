@@ -1,13 +1,8 @@
 import { Text } from "@/components/ui/Text";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { StyleSheet, View } from "react-native";
 
-export function TablesLegend({
-  isSmallScreen,
-  availableCount,
-  dineInCount,
-  reservedCount,
-}) {
+export function TablesLegend({ isSmallScreen, availableCount, dineInCount }) {
   return (
     <View
       style={[
@@ -53,13 +48,13 @@ const styles = StyleSheet.create({
     backgroundColor: ThemeColors.primary, // Modified background
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.lg,
-    borderRadius: ThemeRadius.lg,
+    borderRadius: 16,
     gap: ThemeSpacing.md,
     shadowColor: ThemeColors.black,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 8,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
     borderWidth: 1,
     borderColor: ThemeColors.border,
   },

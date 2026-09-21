@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.md,
-    backgroundColor: ThemeColors.surfaceElevated,
+    backgroundColor: ThemeColors.white,
     borderBottomWidth: 1,
     borderBottomColor: ThemeColors.border,
   },
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     color: ThemeColors.textPrimary,
   },
   userBadge: {
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: ThemeRadius.md,

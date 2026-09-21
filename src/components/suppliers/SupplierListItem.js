@@ -1,5 +1,5 @@
 import { Text } from "@/components/ui/Text";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { Building2 } from "lucide-react-native";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     borderWidth: 1,
     borderColor: ThemeColors.border,
     justifyContent: "center",
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     width: "70%",
   },
   categoryPill: {
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 6,
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
 
   // Mobile Card Styles
   card: {
-    backgroundColor: ThemeColors.white,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
     padding: ThemeSpacing.lg,
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
   },
   categoryBadge: {
     fontSize: 11,
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     color: ThemeColors.textSecondary,
     paddingHorizontal: 8,
     paddingVertical: 4,

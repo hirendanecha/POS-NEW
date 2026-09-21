@@ -1,21 +1,14 @@
 import { CommonHeader } from "@/components/common/CommonHeader";
-import { HeaderQuickNav } from "@/components/common/HeaderQuickNav";
-import { BillingConfigModal } from "@/components/dashboard/BillingConfigModal";
-import { DiscountConfigModal } from "@/components/dashboard/DiscountConfigModal";
-import { PrintConfigModal } from "@/components/dashboard/PrintConfigModal";
-import { ServiceRenewalModal } from "@/components/dashboard/ServiceRenewalModal";
-import { TaxConfigModal } from "@/components/dashboard/TaxConfigModal";
 import { Text } from "@/components/ui/Text";
 import { useResponsive } from "@/hooks/useResponsive";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { showAlert } from "@/utils/alert";
 import { hasPermission } from "@/utils/permissions";
 import { useNavigation, useRouter } from "expo-router";
 import {
-  Bell,
   CreditCard,
   FileText,
-  Menu,
+  LifeBuoy,
   Monitor,
   Package,
   QrCode,
@@ -23,11 +16,9 @@ import {
   Sun,
   Truck,
   User,
-  LifeBuoy,
 } from "lucide-react-native";
 import { useState } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 
 const OPERATIONS_OPTIONS = [
@@ -76,18 +67,6 @@ const OPERATIONS_OPTIONS = [
     icon: LifeBuoy,
     path: "/operations/support-ticket",
   },
-  // { key: "discount", label: "Discount", icon: Tags, path: null },
-  // { key: "billing-screen", label: "Billing Screen", icon: Monitor, path: null },
-  // {
-  //   key: "extra-history",
-  //   label: "Extra Information History",
-  //   icon: FileText,
-  //   path: null,
-  // },
-  // { key: "cash-flow", label: "Cash Flow", icon: Banknote, path: null },
-  // { key: "withdrawal", label: "Withdrawal", icon: ArrowUpFromLine, path: null },
-  // { key: "cash-topup", label: "Cash Top-Up", icon: PlusCircle, path: null },
-  // { key: "manual-sync", label: "Manual Sync", icon: RefreshCw, path: null },
 ];
 
 export default function OperationsPage() {
@@ -200,35 +179,14 @@ export default function OperationsPage() {
           )}
         </View>
       </ScrollView>
-
-      <DiscountConfigModal
-        visible={discountModalVisible}
-        onClose={() => setDiscountModalVisible(false)}
-      />
-      <ServiceRenewalModal
-        visible={renewalModalVisible}
-        onClose={() => setRenewalModalVisible(false)}
-      />
-      <BillingConfigModal
-        visible={billingModalVisible}
-        onClose={() => setBillingModalVisible(false)}
-      />
-      <PrintConfigModal
-        visible={printModalVisible}
-        onClose={() => setPrintModalVisible(false)}
-      />
-      <TaxConfigModal
-        visible={taxModalVisible}
-        onClose={() => setTaxModalVisible(false)}
-      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: ThemeColors.surface },
+  root: { flex: 1, backgroundColor: ThemeColors.bg },
   headerSafe: {
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     borderBottomWidth: 1,
     borderColor: ThemeColors.border,
     zIndex: 100,
@@ -263,7 +221,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: ThemeColors.red,
     borderWidth: 1.5,
-    borderColor: ThemeColors.surface,
+    borderColor: ThemeColors.white + "B3",
   },
   scrollContent: { flexGrow: 1, padding: ThemeSpacing.lg },
   section: { marginBottom: ThemeSpacing.lg },
@@ -274,19 +232,19 @@ const styles = StyleSheet.create({
   },
   gridContainer: { flexDirection: "row", flexWrap: "wrap" },
   tile: {
-    backgroundColor: ThemeColors.white,
+    backgroundColor: ThemeColors.white + "B3",
     borderWidth: 1,
     borderColor: ThemeColors.border,
-    borderRadius: ThemeRadius.md,
+    borderRadius: 16,
     padding: ThemeSpacing.md,
     alignItems: "center",
     justifyContent: "center",
     aspectRatio: 1.1,
     shadowColor: ThemeColors.black,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowRadius: 2,
+    elevation: 1,
   },
   tileText: {
     marginTop: ThemeSpacing.lg,

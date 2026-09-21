@@ -115,7 +115,7 @@ export function FloorPlanBuilderModal({ visible, onClose }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.8)",
+    backgroundColor: ThemeColors.black + "CC",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.lg,

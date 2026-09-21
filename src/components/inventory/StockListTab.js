@@ -1,10 +1,10 @@
 import { Text } from "@/components/ui/Text";
 import { useResponsive } from "@/hooks/useResponsive";
+import { deleteInventoryItem } from "@/store/slices/inventorySlice";
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
 import { showAlert } from "@/utils/alert";
-import { Package, Search, Settings2, Trash2, Edit2 } from "lucide-react-native";
+import { Edit2, Package, Search, Settings2, Trash2 } from "lucide-react-native";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   FlatList,
   Image,
@@ -13,9 +13,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { InventoryActionModal } from "./InventoryActionModal";
 import { ProductInventoryModal } from "./ProductInventoryModal";
-import { deleteInventoryItem } from "@/store/slices/inventorySlice";
 
 export function StockListTab({ onEditItem }) {
   const dispatch = useDispatch();
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "80",
     borderRadius: ThemeRadius.sm,
     borderWidth: 1,
     borderColor: ThemeColors.border,
@@ -289,8 +289,8 @@ const styles = StyleSheet.create({
     outlineStyle: "none",
   },
   card: {
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
     overflow: "hidden",
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: ThemeSpacing.sm,
     left: ThemeSpacing.sm,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: ThemeColors.black + "99",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: ThemeRadius.md,

@@ -1,19 +1,15 @@
 import { CommonHeader } from "@/components/common/CommonHeader";
-import { HeaderQuickNav } from "@/components/common/HeaderQuickNav";
 import { Text } from "@/components/ui/Text";
 import { WaiterTicket } from "@/components/waiter/WaiterTicket";
 import { useResponsive } from "@/hooks/useResponsive";
 import {
   fetchActiveOrders,
-  updateKDSItemStatusAsync,
   updateKDSMultipleItemsStatusAsync,
 } from "@/store/slices/posSlice";
 import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { useNavigation } from "expo-router";
-import { Bell, Menu } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function WaiterPage() {
@@ -34,7 +30,10 @@ export default function WaiterPage() {
 
     // Find all items that are Done/Ready/Completed and mark them Served
     const itemsToUpdate = order.items.filter(
-      (item) => item.status === "Done" || item.status === "Ready" || item.status === "Completed"
+      (item) =>
+        item.status === "Done" ||
+        item.status === "Ready" ||
+        item.status === "Completed",
     );
 
     if (itemsToUpdate.length === 0) return;

@@ -1,5 +1,6 @@
 import { Text } from "@/components/ui/Text";
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { Picker } from "@react-native-picker/picker";
 import { Plus, X } from "lucide-react-native";
 import { useState } from "react";
 import {
@@ -11,13 +12,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 
-export function WithdrawalModal({ visible, onClose, onSubmit, isLoading, teamMembers }) {
+export function WithdrawalModal({
+  visible,
+  onClose,
+  onSubmit,
+  isLoading,
+  teamMembers,
+}) {
   const [amount, setAmount] = useState("");
   const [withdrawnBy, setWithdrawnBy] = useState("");
   const [description, setDescription] = useState("");
-  const [withdrawalDate, setWithdrawalDate] = useState(new Date().toISOString().split('T')[0]);
+  const [withdrawalDate, setWithdrawalDate] = useState(
+    new Date().toISOString().split("T")[0],
+  );
   const [error, setError] = useState("");
 
   const handleSubmit = () => {
@@ -33,14 +41,14 @@ export function WithdrawalModal({ visible, onClose, onSubmit, isLoading, teamMem
       withdrawn_by: withdrawnBy,
       description: description.trim(),
       withdrawal_date: new Date(withdrawalDate).toISOString(),
-      payment_method: "Cash"
+      payment_method: "Cash",
     });
-    
+
     // Reset form
     setAmount("");
     setWithdrawnBy("");
     setDescription("");
-    setWithdrawalDate(new Date().toISOString().split('T')[0]);
+    setWithdrawalDate(new Date().toISOString().split("T")[0]);
     setError("");
   };
 
@@ -69,7 +77,7 @@ export function WithdrawalModal({ visible, onClose, onSubmit, isLoading, teamMem
                 {error}
               </Text>
             ) : null}
-            
+
             <View style={styles.field}>
               <Text weight="medium" style={styles.label}>
                 Amount
@@ -92,12 +100,16 @@ export function WithdrawalModal({ visible, onClose, onSubmit, isLoading, teamMem
                   selectedValue={withdrawnBy}
                   onValueChange={(itemValue) => setWithdrawnBy(itemValue)}
                 >
-                  <Picker.Item label="Select Team Member..." value="" color={ThemeColors.textMuted} />
+                  <Picker.Item
+                    label="Select Team Member..."
+                    value=""
+                    color={ThemeColors.textMuted}
+                  />
                   {teamMembers?.map((member) => (
-                    <Picker.Item 
-                      key={member.id} 
-                      label={`${member.first_name} ${member.last_name}`} 
-                      value={member.id} 
+                    <Picker.Item
+                      key={member.id}
+                      label={`${member.first_name} ${member.last_name}`}
+                      value={member.id}
                     />
                   ))}
                 </Picker>
@@ -141,7 +153,8 @@ export function WithdrawalModal({ visible, onClose, onSubmit, isLoading, teamMem
             <TouchableOpacity
               style={[
                 styles.submitBtn,
-                (!amount || !withdrawnBy || isLoading) && styles.submitBtnDisabled,
+                (!amount || !withdrawnBy || isLoading) &&
+                  styles.submitBtnDisabled,
               ]}
               onPress={handleSubmit}
               disabled={!amount || !withdrawnBy || isLoading}
@@ -167,15 +180,15 @@ export function WithdrawalModal({ visible, onClose, onSubmit, isLoading, teamMem
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "center",
     alignItems: "center",
   },
   modal: {
-    backgroundColor: ThemeColors.bg,
+    backgroundColor: ThemeColors.white,
     width: "90%",
     maxWidth: 500,
-    borderRadius: ThemeRadius.lg,
+    borderRadius: 16,
     overflow: "hidden",
     maxHeight: "80%",
   },
@@ -186,7 +199,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
   },
   headerTitle: {
     fontSize: 18,
@@ -213,9 +226,9 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.md,
     fontSize: 15,
     color: ThemeColors.textPrimary,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     minHeight: 48,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   textArea: {
     minHeight: 80,
@@ -224,15 +237,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: ThemeColors.border,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.surface,
-    overflow: 'hidden',
+    backgroundColor: ThemeColors.white + "B3",
+    overflow: "hidden",
   },
   footer: {
     flexDirection: "row",
     padding: ThemeSpacing.lg,
     borderTopWidth: 1,
     borderTopColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     gap: ThemeSpacing.md,
   },
   cancelBtn: {
@@ -251,7 +264,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: ThemeSpacing.md,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.primary,
+    backgroundColor: ThemeColors.amber,
     alignItems: "center",
     justifyContent: "center",
     gap: ThemeSpacing.sm,

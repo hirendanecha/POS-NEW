@@ -4,8 +4,8 @@ import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 export const FILTER_TABS = [
-  { key: "All", label: "All", activeColor: ThemeColors.emerald },
-  { key: "Dine In", label: "Dine In", activeColor: ThemeColors.emerald },
+  { key: "All", label: "All", activeColor: ThemeColors.amber },
+  { key: "Dine In", label: "Dine In", activeColor: ThemeColors.amber },
   { key: "Takeaway", label: "Takeaway", activeColor: ThemeColors.amber },
 ];
 
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   filterTab: {
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.sm,
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
   },

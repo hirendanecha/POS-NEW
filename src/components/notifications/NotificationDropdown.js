@@ -105,7 +105,7 @@ export function NotificationDropdown({ visible, onClose }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: ThemeColors.black + "33",
     alignItems: "flex-end", // Align to the right
   },
   dropdownContainer: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     maxHeight: 500,
     backgroundColor: ThemeColors.surface,
     borderRadius: ThemeRadius.lg,
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 12,

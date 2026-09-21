@@ -16,7 +16,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import socketService from "../../services/socketService";
 import { logoutUser } from "../../store/slices/authSlice";
-import { ThemeColors as Colors } from "../../theme/theme";
+import { ThemeColors, ThemeColors as Colors } from "../../theme/theme";
 
 const { width } = Dimensions.get("window");
 const isTablet = width > 768;
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   },
   overlayBg: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(15, 23, 42, 0.1)", // Dark slate overlay
+    backgroundColor: ThemeColors.primary + "1A", // Dark slate overlay
     backdropFilter: "blur(8px)", // For web
   },
   modalContainer: {
@@ -245,12 +245,12 @@ const styles = StyleSheet.create({
     maxWidth: 420,
     alignItems: "center",
     elevation: 24,
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 12 },
     shadowOpacity: 0.25,
     shadowRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.1)",
+    borderColor: ThemeColors.white + "1A",
   },
   iconContainer: {
     marginBottom: 24,

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { Text } from "@/components/ui/Text";
+import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { CheckSquare, GitMerge, Square, X } from "lucide-react-native";
+import { useEffect, useState } from "react";
 import {
   Modal,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
-  ScrollView,
 } from "react-native";
-import { Text } from "@/components/ui/Text";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
-import { X, CheckSquare, Square, GitMerge } from "lucide-react-native";
 
 export function MergeTablesModal({ visible, onClose, floorTables, onMerge }) {
   const [selectedTableIds, setSelectedTableIds] = useState([]);
@@ -49,8 +49,11 @@ export function MergeTablesModal({ visible, onClose, floorTables, onMerge }) {
             <Text style={styles.subtitle}>
               Select 2 or more tables to merge into a single large table.
             </Text>
-            
-            <ScrollView style={styles.tableList} contentContainerStyle={styles.tableGrid}>
+
+            <ScrollView
+              style={styles.tableList}
+              contentContainerStyle={styles.tableGrid}
+            >
               {floorTables.map((table) => {
                 const isSelected = selectedTableIds.includes(table.id);
                 return (
@@ -113,7 +116,7 @@ export function MergeTablesModal({ visible, onClose, floorTables, onMerge }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "center",
     alignItems: "center",
   },

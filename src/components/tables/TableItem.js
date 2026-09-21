@@ -38,27 +38,29 @@ export function TableItem({ table, onPress, onLongPress }) {
   if (isCircle || isOval) {
     borderRadius = 1000;
   }
+  const baseBgColor = isReserved
+    ? ThemeColors.amber
+    : isOccupied
+      ? ThemeColors.blue
+      : ThemeColors.white;
 
-  // Determine text and background colors based on status
-  let textColor = ThemeColors.textPrimary;
-  let bgColor = ThemeColors.white;
-  let borderColor = ThemeColors.border;
-  let chairColor = ThemeColors.white;
-  let chairBorderColor = ThemeColors.border;
+  const baseChairColor = isReserved
+    ? ThemeColors.amber
+    : isOccupied
+      ? ThemeColors.blue
+      : ThemeColors.white;
 
-  if (isOccupied) {
-    textColor = ThemeColors.blue;
-    bgColor = ThemeColors.blueDim;
-    borderColor = ThemeColors.blue;
-    chairColor = ThemeColors.blue;
-    chairBorderColor = ThemeColors.blue;
-  } else if (isReserved) {
-    textColor = ThemeColors.red;
-    bgColor = ThemeColors.redDim;
-    borderColor = ThemeColors.red;
-    chairColor = ThemeColors.red;
-    chairBorderColor = ThemeColors.red;
-  }
+  const bgColor =
+    baseBgColor === ThemeColors.white ? baseBgColor + "B3" : baseBgColor + "70";
+  const chairColor =
+    baseChairColor === ThemeColors.white
+      ? baseChairColor + "B3"
+      : baseChairColor + "70";
+  const chairBorderColor = ThemeColors.border;
+  const textColor =
+    isReserved || isOccupied
+      ? ThemeColors.textPrimary
+      : ThemeColors.textPrimary;
 
   const chairsPerRow = Math.ceil(table.capacity / 2);
   const chairArray = Array.from({ length: chairsPerRow });
@@ -248,7 +250,7 @@ export function TableItem({ table, onPress, onLongPress }) {
           },
         ]}
       >
-        <Text weight="bold" style={[styles.tableText, { color: textColor }]}>
+        <Text style={[styles.tableText, { color: textColor }]}>
           {table.name}
         </Text>
         {isOccupied && <Eye size={18} color={textColor} />}
@@ -279,8 +281,8 @@ const styles = StyleSheet.create({
   chair: {
     width: 24,
     height: 8,
-    backgroundColor: ThemeColors.surface,
-    borderRadius: 4,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 6,
     marginVertical: 4,
     shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
@@ -291,14 +293,15 @@ const styles = StyleSheet.create({
   tableBody: {
     width: "100%",
     height: 60,
-    borderRadius: ThemeRadius.lg,
+    borderRadius: 16,
+    // borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
     shadowColor: ThemeColors.black,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
+    shadowRadius: 2,
+    elevation: 1,
   },
   tableText: {
     fontSize: 16,

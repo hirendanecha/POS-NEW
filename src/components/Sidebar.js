@@ -350,9 +350,9 @@ const styles = StyleSheet.create({
     backgroundColor: ThemeColors.primary,
     overflow: "hidden",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.08)",
+    borderColor: ThemeColors.white + "14",
     ...(Platform.OS === "web"
-      ? { boxShadow: "2px 0 16px rgba(0,0,0,0.4)" }
+      ? { boxShadow: `2px 0 16px ${ThemeColors.black}66` }
       : {
           shadowColor: ThemeColors.black,
           shadowOffset: { width: 4, height: 0 },
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     gap: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.08)",
+    borderBottomColor: ThemeColors.white + "14",
   },
   logoIcon: {
     width: 36,
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   sectionTitle: {
-    color: "rgba(255,255,255,0.3)",
+    color: ThemeColors.white + "4D",
     fontSize: 10,
     letterSpacing: 2,
     paddingHorizontal: 20,
@@ -444,9 +444,7 @@ const styles = StyleSheet.create({
     gap: 0,
   },
   menuItemActive: {
-    backgroundColor: "rgba(59, 130, 246, 0.15)", // Premium Blue with low opacity
-    borderWidth: 1,
-    borderColor: "rgba(59, 130, 246, 0.3)",
+    backgroundColor: ThemeColors.accent + "26", // Premium Blue with low opacity
   },
 
   // ── Labels ────────────────────────────
@@ -499,8 +497,8 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     gap: 12,
     borderTopWidth: 1,
-    borderTopColor: "rgba(255,255,255,0.05)",
-    backgroundColor: "rgba(16, 185, 129, 0.08)", // subtle emerald tint
+    borderTopColor: ThemeColors.white + "0D",
+    backgroundColor: ThemeColors.emerald + "14", // subtle emerald tint
   },
   branchIndicatorCollapsed: {
     justifyContent: "center",
@@ -528,7 +526,7 @@ const styles = StyleSheet.create({
   bottomSection: {
     paddingVertical: 12,
     borderTopWidth: 1,
-    borderTopColor: "rgba(255,255,255,0.05)",
+    borderTopColor: ThemeColors.white + "0D",
   },
   bottomBtn: {
     flexDirection: "row",
@@ -545,7 +543,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   bottomBtnActive: {
-    backgroundColor: "rgba(59, 130, 246, 0.1)",
+    backgroundColor: ThemeColors.accent + "1A",
   },
   bottomBtnLabel: {
     color: ThemeColors.textMuted,
@@ -559,7 +557,7 @@ const styles = StyleSheet.create({
   // ── Modal ─────────────────────────────
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "center",
     alignItems: "center",
   },

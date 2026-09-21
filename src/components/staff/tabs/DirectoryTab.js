@@ -165,12 +165,12 @@ export default function DirectoryTab({ onEditEmployee }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: ThemeColors.bg,
+    backgroundColor: ThemeColors.white + "80",
   },
   tableContainer: {
     margin: ThemeSpacing.lg,
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
     overflow: "hidden",
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: ThemeColors.borderSubtle,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     flexWrap: "wrap",
     gap: ThemeSpacing.md,
   },
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     borderRadius: ThemeRadius.sm,
     borderWidth: 1,
     borderColor: ThemeColors.border,

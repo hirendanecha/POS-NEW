@@ -497,7 +497,7 @@ export function EBillCheckoutModal({ visible, onClose, onComplete }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.55)",
+    backgroundColor: ThemeColors.black + "8C",
     justifyContent: "flex-end",
   },
   container: {

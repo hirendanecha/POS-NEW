@@ -12,13 +12,7 @@ import {
   View,
 } from "react-native";
 
-const CATEGORIES = [
-  "Electricity",
-  "Water",
-  "Internet",
-  "Rent",
-  "Other"
-];
+const CATEGORIES = ["Electricity", "Water", "Internet", "Rent", "Other"];
 
 export function UtilityModal({ visible, onClose, onSubmit, isLoading }) {
   const [amount, setAmount] = useState("");
@@ -36,9 +30,9 @@ export function UtilityModal({ visible, onClose, onSubmit, isLoading }) {
     onSubmit({
       amount: Number(amount),
       utility_type: utilityType,
-      vendor: vendor.trim()
+      vendor: vendor.trim(),
     });
-    
+
     // Reset form
     setAmount("");
     setUtilityType(CATEGORIES[0]);
@@ -71,7 +65,7 @@ export function UtilityModal({ visible, onClose, onSubmit, isLoading }) {
                 {error}
               </Text>
             ) : null}
-            
+
             <View style={styles.field}>
               <Text weight="medium" style={styles.label}>
                 Vendor
@@ -160,15 +154,15 @@ export function UtilityModal({ visible, onClose, onSubmit, isLoading }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "center",
     alignItems: "center",
   },
   modal: {
-    backgroundColor: ThemeColors.bg,
+    backgroundColor: ThemeColors.white,
     width: "90%",
     maxWidth: 500,
-    borderRadius: ThemeRadius.lg,
+    borderRadius: 16,
     overflow: "hidden",
     maxHeight: "80%",
   },
@@ -179,7 +173,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
   },
   headerTitle: {
     fontSize: 18,
@@ -206,9 +200,9 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.md,
     fontSize: 15,
     color: ThemeColors.textPrimary,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     minHeight: 48,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   categoryGrid: {
     flexDirection: "row",
@@ -221,11 +215,11 @@ const styles = StyleSheet.create({
     borderRadius: ThemeRadius.full,
     borderWidth: 1,
     borderColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
   },
   categoryChipActive: {
-    backgroundColor: ThemeColors.primary,
-    borderColor: ThemeColors.primary,
+    backgroundColor: ThemeColors.amber,
+    borderColor: ThemeColors.amber,
   },
   categoryChipText: {
     fontSize: 13,
@@ -240,7 +234,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.lg,
     borderTopWidth: 1,
     borderTopColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     gap: ThemeSpacing.md,
   },
   cancelBtn: {
@@ -259,7 +253,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: ThemeSpacing.md,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.primary,
+    backgroundColor: ThemeColors.amber,
     alignItems: "center",
     justifyContent: "center",
     gap: ThemeSpacing.sm,

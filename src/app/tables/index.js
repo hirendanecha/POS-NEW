@@ -2,6 +2,7 @@ import { DraggableTable } from "@/components/tables/DraggableTable";
 import { MergeTablesModal } from "@/components/tables/MergeTablesModal";
 import { TableActionModal } from "@/components/tables/TableActionModal";
 import { TableDetailsModal } from "@/components/tables/TableDetailsModal";
+import { TablesFabGroup } from "@/components/tables/TablesFabGroup";
 import { TablesHeader } from "@/components/tables/TablesHeader";
 import { TablesLegend } from "@/components/tables/TablesLegend";
 import { TablesZoomControls } from "@/components/tables/TablesZoomControls";
@@ -21,17 +22,10 @@ import {
   setOrderType,
 } from "@/store/slices/posSlice";
 
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { useRouter } from "expo-router";
-import { Check, Edit2, Plus } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
@@ -257,59 +251,29 @@ export default function TablesScreen() {
         handleResetZoom={handleResetZoom}
       />
 
-      <View style={styles.fabContainer}>
-        {!isEditMode && (
-          <TouchableOpacity
-            style={[styles.fab, isEditMode && styles.fabActive]}
-            activeOpacity={0.8}
-            onPress={() => setShowMergeModal(true)}
-          >
-            <Text style={styles.mergeFabText}>Merge Tables</Text>
-          </TouchableOpacity>
-        )}
-
-        {isEditMode && (
-          <TouchableOpacity
-            style={[styles.fab, styles.addFab]}
-            activeOpacity={0.8}
-            onPress={() => {
-              setModalMode("add");
-              setSelectedTable(null);
-              setShowAddModal(true);
-            }}
-          >
-            <Plus size={20} color={ThemeColors.white} />
-            <Text style={styles.fabText}>Add Table</Text>
-          </TouchableOpacity>
-        )}
-        <TouchableOpacity
-          style={[styles.fab, isEditMode && styles.fabActive]}
-          activeOpacity={0.8}
-          onPress={async () => {
-            if (isEditMode) {
-              await Promise.all(
-                floorTables.map((t) =>
-                  updateTable(t.id, {
-                    position_x: t.x,
-                    position_y: t.y,
-                    rotation: t.rotation || 0,
-                  }),
-                ),
-              );
-            }
-            setIsEditMode(!isEditMode);
-          }}
-        >
-          {isEditMode ? (
-            <Check size={20} color={ThemeColors.white} strokeWidth={3} />
-          ) : (
-            <Edit2 size={20} color={ThemeColors.white} strokeWidth={2.5} />
-          )}
-          <Text style={styles.fabText}>
-            {isEditMode ? "Done Editing" : "Edit Layout"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <TablesFabGroup
+        isEditMode={isEditMode}
+        onMergePress={() => setShowMergeModal(true)}
+        onAddPress={() => {
+          setModalMode("add");
+          setSelectedTable(null);
+          setShowAddModal(true);
+        }}
+        onEditToggle={async () => {
+          if (isEditMode) {
+            await Promise.all(
+              floorTables.map((t) =>
+                updateTable(t.id, {
+                  position_x: t.x,
+                  position_y: t.y,
+                  rotation: t.rotation || 0,
+                }),
+              ),
+            );
+          }
+          setIsEditMode(!isEditMode);
+        }}
+      />
 
       <TableDetailsModal
         visible={showAddModal}
@@ -413,60 +377,5 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: ThemeColors.textMuted,
     borderStyle: "dotted",
-  },
-  fabContainer: {
-    position: "absolute",
-    bottom: ThemeSpacing.xl,
-    right: ThemeSpacing.xxl,
-    alignItems: "flex-end",
-    gap: 16,
-  },
-  fab: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    backgroundColor: ThemeColors.textPrimary,
-    paddingHorizontal: ThemeSpacing.xl,
-    paddingVertical: 14,
-    borderRadius: ThemeRadius.full,
-    shadowColor: ThemeColors.textPrimary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  addFab: { backgroundColor: ThemeColors.primary },
-  fabActive: {
-    backgroundColor: ThemeColors.emerald,
-    shadowColor: ThemeColors.emerald,
-  },
-  fabText: {
-    color: ThemeColors.white,
-    fontSize: 15,
-    fontWeight: "700",
-    letterSpacing: 0.5,
-  },
-  mergeFabContainer: {
-    position: "absolute",
-    bottom: ThemeSpacing.xl,
-    left: ThemeSpacing.xxl,
-    alignItems: "flex-start",
-  },
-  mergeFab: {
-    backgroundColor: ThemeColors.emerald,
-    paddingHorizontal: ThemeSpacing.xl,
-    paddingVertical: 14,
-    borderRadius: ThemeRadius.full,
-    shadowColor: ThemeColors.emerald,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.35,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  mergeFabText: {
-    color: ThemeColors.white,
-    fontSize: 15,
-    fontWeight: "700",
   },
 });

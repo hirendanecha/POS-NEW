@@ -1,19 +1,19 @@
 import { Dropdown } from "@/components/ui/Dropdown";
 import { Text } from "@/components/ui/Text";
 import { useResponsive } from "@/hooks/useResponsive";
+import { adjustInventoryStock } from "@/store/slices/inventorySlice";
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
 import { AlertCircle, Save, X } from "lucide-react-native";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { adjustInventoryStock } from "@/store/slices/inventorySlice";
 import {
+  ActivityIndicator,
   Modal,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 export function InventoryActionModal({
   visible,
@@ -67,25 +67,28 @@ export function InventoryActionModal({
       }
 
       const movementType = type === "quarantine" ? "Quarantine" : "Adjustment";
-      const finalReason = type === "quarantine" ? `Quarantine: ${reason}` : reason;
+      const finalReason =
+        type === "quarantine" ? `Quarantine: ${reason}` : reason;
 
       setIsSubmitting(true);
-      dispatch(adjustInventoryStock({
-        item_id: product.id,
-        quantity_change: finalQty,
-        movement_type: movementType,
-        reason: finalReason,
-        performed_by: currentUser?.id
-      }))
-      .unwrap()
-      .then(() => {
-        setIsSubmitting(false);
-        onClose();
-      })
-      .catch((err) => {
-        setIsSubmitting(false);
-        setError(err.message || "Failed to adjust stock");
-      });
+      dispatch(
+        adjustInventoryStock({
+          item_id: product.id,
+          quantity_change: finalQty,
+          movement_type: movementType,
+          reason: finalReason,
+          performed_by: currentUser?.id,
+        }),
+      )
+        .unwrap()
+        .then(() => {
+          setIsSubmitting(false);
+          onClose();
+        })
+        .catch((err) => {
+          setIsSubmitting(false);
+          setError(err.message || "Failed to adjust stock");
+        });
     } else {
       // Stub for other types
       onClose();
@@ -190,7 +193,7 @@ export function InventoryActionModal({
                       },
                       adjustmentType === "add"
                         ? {
-                            backgroundColor: ThemeColors.surface,
+                            backgroundColor: ThemeColors.white + "80",
                             shadowColor: ThemeColors.black,
                             shadowOffset: { width: 0, height: 1 },
                             shadowOpacity: 0.1,
@@ -210,7 +213,7 @@ export function InventoryActionModal({
                       style={{
                         color:
                           adjustmentType === "add"
-                            ? ThemeColors.emerald
+                            ? ThemeColors.amber
                             : ThemeColors.textMuted,
                       }}
                     >
@@ -227,7 +230,7 @@ export function InventoryActionModal({
                       },
                       adjustmentType === "remove"
                         ? {
-                            backgroundColor: ThemeColors.surface,
+                            backgroundColor: ThemeColors.white + "80",
                             shadowColor: ThemeColors.black,
                             shadowOffset: { width: 0, height: 1 },
                             shadowOpacity: 0.1,
@@ -384,13 +387,17 @@ export function InventoryActionModal({
             <TouchableOpacity style={styles.btnCancel} onPress={onClose}>
               <Text style={styles.btnCancelText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              style={[styles.btnPrimary, isSubmitting && { opacity: 0.7 }]} 
+            <TouchableOpacity
+              style={[styles.btnPrimary, isSubmitting && { opacity: 0.7 }]}
               onPress={handleSubmit}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                <ActivityIndicator size="small" color={ThemeColors.white} style={{ marginRight: 8 }} />
+                <ActivityIndicator
+                  size="small"
+                  color={ThemeColors.white}
+                  style={{ marginRight: 8 }}
+                />
               ) : (
                 <Save
                   size={16}
@@ -412,15 +419,15 @@ export function InventoryActionModal({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor: ThemeColors.black + "66",
     justifyContent: "center",
     alignItems: "center",
   },
   modal: {
     width: "90%",
     maxWidth: 500,
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.xl,
+    backgroundColor: ThemeColors.white,
+    borderRadius: 16,
     overflow: "hidden",
     shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 10 },
@@ -480,7 +487,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.xl,
     borderTopWidth: 1,
     borderTopColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surfaceElevated,
+    backgroundColor: ThemeColors.white + "80",
   },
   btnCancel: {
     paddingHorizontal: ThemeSpacing.lg,
@@ -488,7 +495,7 @@ const styles = StyleSheet.create({
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
     borderColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "80",
   },
   btnCancelText: {
     fontSize: 14,
@@ -500,7 +507,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.md,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
   },
   btnPrimaryText: {
     fontSize: 14,

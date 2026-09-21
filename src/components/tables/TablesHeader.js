@@ -1,17 +1,9 @@
 import { CommonHeader } from "@/components/common/CommonHeader";
 import { Text } from "@/components/ui/Text";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-export function TablesHeader({
-  isDesktop,
-  isEditMode,
-  setIsEditMode,
-  floors,
-  activeFloor,
-  setActiveFloor,
-  onMergePress,
-}) {
+export function TablesHeader({ floors, activeFloor, setActiveFloor }) {
   return (
     <CommonHeader
       title="Table View"
@@ -92,13 +84,19 @@ const styles = StyleSheet.create({
   floorTab: {
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.sm,
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
+    backgroundColor: ThemeColors.white + "B3",
+    shadowColor: ThemeColors.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   floorTabActive: {
-    backgroundColor: ThemeColors.emerald,
-    borderColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.primary,
+    borderColor: ThemeColors.primary,
   },
   floorTabText: {
     fontSize: 13,

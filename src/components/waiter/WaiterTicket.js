@@ -34,13 +34,6 @@ export function WaiterTicket({ order, onServeAll }) {
 
   const isOverdue = elapsed >= 15 * 60;
 
-  const formatTime = (seconds) => {
-    if (isNaN(seconds) || seconds < 0) return "0m 0s";
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}m ${s}s`;
-  };
-
   const cardDynamicStyle = {
     backgroundColor: isOverdue ? ThemeColors.red + "15" : ThemeColors.surface,
     borderColor: isOverdue ? ThemeColors.red : ThemeColors.borderSubtle,
@@ -54,10 +47,10 @@ export function WaiterTicket({ order, onServeAll }) {
           <View
             style={[
               styles.iconBox,
-              { backgroundColor: ThemeColors.primary + "15" },
+              { backgroundColor: ThemeColors.amber + "15" },
             ]}
           >
-            <Utensils size={18} color={ThemeColors.primary} />
+            <Utensils size={18} color={ThemeColors.amber} />
           </View>
           <View style={{ flex: 1 }}>
             <Text weight="bold" style={styles.cardPlatform} numberOfLines={1}>
@@ -189,7 +182,7 @@ const styles = StyleSheet.create({
     marginBottom: ThemeSpacing.lg,
     borderWidth: 1,
     overflow: "hidden",
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 8,
@@ -267,13 +260,13 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 8,
-    backgroundColor: ThemeColors.borderSubtle,
+    backgroundColor: ThemeColors.amber + "15",
     justifyContent: "center",
     alignItems: "center",
   },
   orderItemQtyText: {
     fontSize: 13,
-    color: ThemeColors.textPrimary,
+    color: ThemeColors.amber,
   },
   orderItemName: {
     fontSize: 15,

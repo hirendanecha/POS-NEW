@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   rolePill: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     borderWidth: 1,
     borderColor: ThemeColors.borderSubtle,
     paddingHorizontal: 8,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: ThemeRadius.sm,
     borderWidth: 1,
     borderColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     gap: 4,
   },
   actionBtnWarning: {
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   actionBtnDesktopDelete: {
     padding: 6,
     borderRadius: ThemeRadius.sm,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
   },
   actionBtnText: {
     fontSize: 11,
@@ -214,8 +214,8 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
     paddingVertical: ThemeSpacing.md,
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
   actionBtn: {
     padding: 8,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
   },
   deleteBtn: {
     backgroundColor: ThemeColors.rose + "18",

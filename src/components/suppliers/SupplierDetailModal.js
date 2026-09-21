@@ -28,8 +28,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
 
 export function SupplierDetailModal({ visible, supplierId, onClose }) {
   const { items: suppliers } = useSelector((state) => state.supplier);
@@ -78,7 +78,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
   const getRiskColor = (risk) => {
     switch (risk) {
       case "Low":
-        return ThemeColors.emerald;
+        return ThemeColors.amber;
       case "Medium":
         return ThemeColors.amber;
       case "High":
@@ -126,7 +126,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
             ₹{(supplier.stats?.totalSpend || 0).toLocaleString()}
           </Text>
           <Text
-            style={{ fontSize: 12, color: ThemeColors.emerald, marginTop: 4 }}
+            style={{ fontSize: 12, color: ThemeColors.amber, marginTop: 4 }}
           >
             +12% from last year
           </Text>
@@ -272,7 +272,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
               {
                 backgroundColor:
                   supplier.status === "Active"
-                    ? ThemeColors.emerald + "20"
+                    ? ThemeColors.amber + "20"
                     : ThemeColors.border,
               },
             ]}
@@ -282,7 +282,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
               style={{
                 color:
                   supplier.status === "Active"
-                    ? ThemeColors.emerald
+                    ? ThemeColors.amber
                     : ThemeColors.textMuted,
               }}
             >
@@ -308,12 +308,12 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
             <TouchableOpacity
               onPress={() => alert(`Calling ${supplier.contact?.mobile}...`)}
             >
-              <Phone size={18} color={ThemeColors.emerald} />
+              <Phone size={18} color={ThemeColors.amber} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => alert(`Emailing ${supplier.contact?.email}...`)}
             >
-              <Mail size={18} color={ThemeColors.emerald} />
+              <Mail size={18} color={ThemeColors.amber} />
             </TouchableOpacity>
           </View>
         </View>
@@ -337,7 +337,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.infoLabel}>Website:</Text>
-          <Text style={[styles.infoValue, { color: ThemeColors.emerald }]}>
+          <Text style={[styles.infoValue, { color: ThemeColors.amber }]}>
             {supplier.contact?.website || "N/A"}
           </Text>
         </View>
@@ -393,7 +393,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
     const percentage = (score / max) * 100;
     const color =
       percentage >= 80
-        ? ThemeColors.emerald
+        ? ThemeColors.amber
         : percentage >= 50
           ? ThemeColors.amber
           : ThemeColors.rose;
@@ -516,7 +516,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
             styles.productRow,
             {
               borderBottomColor: ThemeColors.border,
-              backgroundColor: ThemeColors.surfaceHighlight,
+              backgroundColor: ThemeColors.white + "80",
               paddingHorizontal: 12,
               borderRadius: 6,
             },
@@ -552,7 +552,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
           </Text>
         </View>
 
-        {supplier.products?.map((prod, idx) => (
+        {(Array.isArray(supplier.products) ? supplier.products : []).map((prod, idx) => (
           <View
             key={idx}
             style={[styles.productRow, { paddingHorizontal: 12 }]}
@@ -570,13 +570,13 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
               <View
                 style={[
                   styles.badge,
-                  { backgroundColor: ThemeColors.emerald + "20" },
+                  { backgroundColor: ThemeColors.amber + "20" },
                 ]}
               >
                 <Text
                   style={{
                     fontSize: 10,
-                    color: ThemeColors.emerald,
+                    color: ThemeColors.amber,
                     fontWeight: "bold",
                   }}
                 >
@@ -586,7 +586,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
             </View>
           </View>
         ))}
-        {(!supplier.products || supplier.products.length === 0) && (
+        {(!Array.isArray(supplier.products) || supplier.products.length === 0) && (
           <Text style={{ color: ThemeColors.textMuted, marginTop: 12 }}>
             No products have been mapped to this supplier yet.
           </Text>
@@ -614,13 +614,13 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
               style={styles.iconBtn}
               onPress={() => alert("Downloading Contract PDF...")}
             >
-              <Download size={16} color={ThemeColors.emerald} />
+              <Download size={16} color={ThemeColors.amber} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconBtn}
               onPress={() => alert("Opening contract in external viewer...")}
             >
-              <ExternalLink size={16} color={ThemeColors.emerald} />
+              <ExternalLink size={16} color={ThemeColors.amber} />
             </TouchableOpacity>
           </View>
         </View>
@@ -651,7 +651,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
           style={{
             marginTop: ThemeSpacing.lg,
             padding: ThemeSpacing.md,
-            backgroundColor: ThemeColors.surfaceHighlight,
+            backgroundColor: ThemeColors.white + "80",
             borderRadius: ThemeRadius.md,
             borderWidth: 1,
             borderColor: ThemeColors.borderSubtle,
@@ -706,7 +706,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
         </TouchableOpacity>
       </View>
 
-      {supplier.communications?.map((comm, idx) => (
+      {(Array.isArray(supplier.communications) ? supplier.communications : []).map((comm, idx) => (
         <View key={idx} style={styles.commCard}>
           <View style={styles.commHeader}>
             <View
@@ -715,14 +715,14 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
               <View
                 style={{
                   padding: 6,
-                  backgroundColor: ThemeColors.emerald + "15",
+                  backgroundColor: ThemeColors.amber + "15",
                   borderRadius: 20,
                 }}
               >
                 {comm.type === "Email" ? (
-                  <Mail size={14} color={ThemeColors.emerald} />
+                  <Mail size={14} color={ThemeColors.amber} />
                 ) : (
-                  <Phone size={14} color={ThemeColors.emerald} />
+                  <Phone size={14} color={ThemeColors.amber} />
                 )}
               </View>
               <Text weight="bold" style={{ fontSize: 15 }}>
@@ -745,7 +745,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
         </View>
       ))}
 
-      {(!supplier.communications || supplier.communications.length === 0) && (
+      {(!Array.isArray(supplier.communications) || supplier.communications.length === 0) && (
         <View style={{ alignItems: "center", padding: ThemeSpacing.xl }}>
           <MessageSquare size={48} color={ThemeColors.border} />
           <Text
@@ -805,8 +805,8 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
                       style={[
                         styles.filterTab,
                         isActive && {
-                          backgroundColor: ThemeColors.emerald,
-                          borderColor: ThemeColors.emerald,
+                          backgroundColor: ThemeColors.amber,
+                          borderColor: ThemeColors.amber,
                         },
                       ]}
                       activeOpacity={0.8}
@@ -867,8 +867,8 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
                 padding: isMobile ? ThemeSpacing.lg : ThemeSpacing.xxl,
                 width: isMobile ? "95%" : "100%",
                 maxWidth: 500,
-                backgroundColor: ThemeColors.surface,
-                borderRadius: ThemeRadius.xl,
+                backgroundColor: ThemeColors.white + "B3",
+                borderRadius: 16,
               },
             ]}
           >
@@ -1000,8 +1000,8 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
                 padding: isMobile ? ThemeSpacing.lg : ThemeSpacing.xxl,
                 width: isMobile ? "95%" : "100%",
                 maxWidth: 450,
-                backgroundColor: ThemeColors.surface,
-                borderRadius: ThemeRadius.xl,
+                backgroundColor: ThemeColors.white + "B3",
+                borderRadius: 16,
               },
             ]}
           >
@@ -1159,8 +1159,8 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
                 padding: isMobile ? ThemeSpacing.lg : ThemeSpacing.xxl,
                 width: isMobile ? "95%" : "100%",
                 maxWidth: 450,
-                backgroundColor: ThemeColors.surface,
-                borderRadius: ThemeRadius.xl,
+                backgroundColor: ThemeColors.white + "B3",
+                borderRadius: 16,
               },
             ]}
           >
@@ -1278,8 +1278,8 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
                 padding: isMobile ? ThemeSpacing.lg : ThemeSpacing.xxl,
                 width: isMobile ? "95%" : "100%",
                 maxWidth: 500,
-                backgroundColor: ThemeColors.surface,
-                borderRadius: ThemeRadius.xl,
+                backgroundColor: ThemeColors.white + "B3",
+                borderRadius: 16,
               },
             ]}
           >
@@ -1404,7 +1404,7 @@ export function SupplierDetailModal({ visible, supplierId, onClose }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "flex-end",
   },
   overlayCenter: {
@@ -1413,7 +1413,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.xxl,
   },
   modalContainer: {
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white,
     borderTopLeftRadius: ThemeRadius.xl,
     borderTopRightRadius: ThemeRadius.xl,
     width: "100%",
@@ -1425,7 +1425,7 @@ const styles = StyleSheet.create({
     maxWidth: 800,
     height: "auto",
     maxHeight: "95%",
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
   },
   header: {
     flexDirection: "row",
@@ -1464,7 +1464,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.sm,
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
   },
@@ -1487,7 +1487,7 @@ const styles = StyleSheet.create({
   statBox: {
     flex: 1,
     minWidth: 150,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     padding: ThemeSpacing.lg,
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
@@ -1496,14 +1496,14 @@ const styles = StyleSheet.create({
   statTitle: { fontSize: 13, color: ThemeColors.textMuted, marginBottom: 4 },
   statVal: { fontSize: 20, color: ThemeColors.textPrimary },
   riskCard: {
-    backgroundColor: ThemeColors.surfaceHighlight,
+    backgroundColor: ThemeColors.white + "80",
     padding: ThemeSpacing.lg,
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
     borderColor: ThemeColors.borderSubtle,
   },
   infoCard: {
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     padding: ThemeSpacing.lg,
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
@@ -1551,7 +1551,7 @@ const styles = StyleSheet.create({
     borderBottomColor: ThemeColors.borderSubtle,
   },
   commCard: {
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     padding: ThemeSpacing.lg,
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
@@ -1563,7 +1563,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   primaryBtn: {
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.sm,
     borderRadius: ThemeRadius.md,
@@ -1572,7 +1572,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   secondaryBtn: {
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.sm,
     borderRadius: ThemeRadius.md,
@@ -1584,7 +1584,7 @@ const styles = StyleSheet.create({
   },
   iconBtn: {
     padding: 6,
-    backgroundColor: ThemeColors.emerald + "15",
+    backgroundColor: ThemeColors.amber + "15",
     borderRadius: ThemeRadius.sm,
   },
   badge: {

@@ -1,8 +1,8 @@
+import { CommonHeader } from "@/components/common/CommonHeader";
 import { Text } from "@/components/ui/Text";
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import { CommonHeader } from "@/components/common/CommonHeader";
-import { Search, ChevronDown, Plus } from "lucide-react-native";
+import { ChevronDown, Plus, Search } from "lucide-react-native";
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
 export function SupplierHeader({
   searchQuery,
@@ -22,7 +22,11 @@ export function SupplierHeader({
           <View style={styles.filtersContainer}>
             {/* Search Input */}
             <View style={styles.searchBox}>
-              <Search size={16} color={ThemeColors.textMuted} style={styles.searchIcon} />
+              <Search
+                size={16}
+                color={ThemeColors.textMuted}
+                style={styles.searchIcon}
+              />
               <TextInput
                 style={styles.searchInput}
                 placeholder="Search suppliers..."
@@ -33,24 +37,32 @@ export function SupplierHeader({
             </View>
 
             {/* Status Filter Dummy Button (Would ideally open an ActionSheet or simple Modal) */}
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.statusDropdown}
               onPress={() => {
                 // Simple cycle for now to replicate select box behavior on React Native without heavy libraries
-                const currentIndex = statuses.indexOf(statusFilter === "all" ? "All Statuses" : statusFilter);
+                const currentIndex = statuses.indexOf(
+                  statusFilter === "all" ? "All Statuses" : statusFilter,
+                );
                 const nextIndex = (currentIndex + 1) % statuses.length;
                 const nextStatus = statuses[nextIndex];
-                setStatusFilter(nextStatus === "All Statuses" ? "all" : nextStatus);
+                setStatusFilter(
+                  nextStatus === "All Statuses" ? "all" : nextStatus,
+                );
               }}
             >
-              <Text style={styles.statusText}>{statusFilter === "all" ? "All Statuses" : statusFilter}</Text>
+              <Text style={styles.statusText}>
+                {statusFilter === "all" ? "All Statuses" : statusFilter}
+              </Text>
               <ChevronDown size={14} color={ThemeColors.textMuted} />
             </TouchableOpacity>
           </View>
-          
+
           <TouchableOpacity style={styles.addButton} onPress={onAddSupplier}>
             <Plus size={16} color={ThemeColors.white} />
-            <Text weight="bold" style={styles.addButtonText}>Add Supplier</Text>
+            <Text weight="bold" style={styles.addButtonText}>
+              Add Supplier
+            </Text>
           </TouchableOpacity>
         </View>
       }
@@ -100,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: ThemeColors.white,
+    backgroundColor: ThemeColors.white + "80",
     borderWidth: 1,
     borderColor: ThemeColors.border,
     borderRadius: ThemeRadius.md,

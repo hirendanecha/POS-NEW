@@ -253,7 +253,7 @@ export function VariantSelectorModal({ visible, product, onClose, onConfirm }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: ThemeColors.black + "99",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.lg,
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     maxHeight: "90%",
     maxWidth: "80%",
     overflow: "hidden",
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.15,
     shadowRadius: 20,
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   chipPriceActive: {
-    color: "rgba(255,255,255,0.8)",
+    color: ThemeColors.white + "CC",
   },
   footer: {
     flexDirection: "row",

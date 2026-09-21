@@ -6,20 +6,20 @@ import { showAlert } from "@/utils/alert";
 import { Save, Upload, X } from "lucide-react-native";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   Image,
   Modal,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from "react-native";
 
-import { useDispatch } from "react-redux";
 import {
   createInventoryItem,
   updateInventoryItem,
 } from "@/store/slices/inventorySlice";
+import { useDispatch } from "react-redux";
 
 export function InventoryItemModal({
   visible,
@@ -338,15 +338,15 @@ export function InventoryItemModal({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor: ThemeColors.black + "66",
     justifyContent: "center",
     alignItems: "center",
   },
   modal: {
     width: "90%",
     maxWidth: 500,
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.xl,
+    backgroundColor: ThemeColors.white,
+    borderRadius: 16,
     overflow: "hidden",
     shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 10 },
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.xl,
     borderTopWidth: 1,
     borderTopColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surfaceElevated,
+    backgroundColor: ThemeColors.white + "80",
   },
   btnCancel: {
     paddingHorizontal: ThemeSpacing.lg,
@@ -440,7 +440,7 @@ const styles = StyleSheet.create({
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
     borderColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "80",
   },
   btnCancelText: {
     fontSize: 14,
@@ -452,7 +452,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.md,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.emerald, // InventoryActionModal uses emerald
+    backgroundColor: ThemeColors.amber,
   },
   btnPrimaryText: {
     fontSize: 14,

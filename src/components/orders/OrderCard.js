@@ -130,20 +130,6 @@ export function OrderCard({ order, onPayBills, onSeeDetails }) {
             See Details
           </Text>
         </TouchableOpacity>
-
-        {order.payment_status !== "Paid" &&
-          order.status !== "Completed" &&
-          order.status !== "Cancelled" && (
-            <TouchableOpacity
-              style={styles.btnPrimary}
-              activeOpacity={0.8}
-              onPress={() => onPayBills(order)}
-            >
-              <Text weight="bold" style={styles.btnPrimaryText}>
-                Pay Bills
-              </Text>
-            </TouchableOpacity>
-          )}
       </View>
     </View>
   );
@@ -152,16 +138,16 @@ export function OrderCard({ order, onPayBills, onSeeDetails }) {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white + "B3",
+    borderRadius: 16,
     padding: ThemeSpacing.lg,
     borderWidth: 1,
     borderColor: ThemeColors.border,
     shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowRadius: 2,
+    elevation: 1,
   },
   cardHeader: {
     flexDirection: "row",
@@ -187,7 +173,7 @@ const styles = StyleSheet.create({
     gap: 5,
     paddingHorizontal: ThemeSpacing.sm,
     paddingVertical: 4,
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
   },
   statusDot: {
     width: 6,
@@ -255,7 +241,7 @@ const styles = StyleSheet.create({
   },
   moreItems: {
     fontSize: 11,
-    color: ThemeColors.blue,
+    color: ThemeColors.amber,
     marginTop: 2,
     marginBottom: ThemeSpacing.xs,
   },
@@ -286,7 +272,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: ThemeColors.border,
     alignItems: "center",
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "80",
   },
   btnSecondaryText: {
     fontSize: 13,
@@ -296,11 +282,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: ThemeSpacing.sm + 2,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
     alignItems: "center",
   },
   btnPrimaryText: {
     fontSize: 13,
-    color: ThemeColors.surface,
+    color: ThemeColors.white,
   },
 });

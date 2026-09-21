@@ -1,21 +1,21 @@
+import { orderApi } from "@/api/services";
 import { Text } from "@/components/ui/Text";
 import { useResponsive } from "@/hooks/useResponsive";
+import { fetchAllOrders } from "@/store/slices/posSlice";
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
 import { Banknote, CreditCard, Smartphone, X } from "lucide-react-native";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { orderApi } from "@/api/services";
-import { fetchAllOrders } from "@/store/slices/posSlice";
 import {
+  ActivityIndicator,
   Modal,
   ScrollView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from "react-native";
 import Svg, { Path } from "react-native-svg";
+import { useDispatch, useSelector } from "react-redux";
 
 function ZigZagEdge({ width }) {
   // A simple repeating zigzag pattern
@@ -49,7 +49,8 @@ export function PaymentModal({
   const dispatch = useDispatch();
   const activeBranch = useSelector((state) => state.branch?.activeBranch);
   const userBranchId = useSelector((state) => state.auth?.user?.branch_id);
-  const currentBranchId = activeBranch && activeBranch !== "br-1" ? activeBranch : userBranchId;
+  const currentBranchId =
+    activeBranch && activeBranch !== "br-1" ? activeBranch : userBranchId;
 
   const { isMobile, isMiniTab } = useResponsive();
   const [amount, setAmount] = useState("");
@@ -300,7 +301,7 @@ export function PaymentModal({
                               size={20}
                               color={
                                 isActive
-                                  ? ThemeColors.emerald
+                                  ? ThemeColors.amber
                                   : ThemeColors.textSecondary
                               }
                             />
@@ -366,15 +367,26 @@ export function PaymentModal({
                       </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity 
-                      style={[styles.payBtn, isProcessing && { opacity: 0.7 }]} 
+                    <TouchableOpacity
+                      style={[styles.payBtn, isProcessing && { opacity: 0.7 }]}
                       onPress={handlePayment}
                       disabled={isProcessing}
                     >
                       {isProcessing ? (
-                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                          <ActivityIndicator size="small" color={ThemeColors.white} />
-                          <Text weight="bold" style={styles.payBtnText}>Processing...</Text>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 8,
+                          }}
+                        >
+                          <ActivityIndicator
+                            size="small"
+                            color={ThemeColors.white}
+                          />
+                          <Text weight="bold" style={styles.payBtnText}>
+                            Processing...
+                          </Text>
                         </View>
                       ) : (
                         <Text weight="bold" style={styles.payBtnText}>
@@ -396,14 +408,14 @@ export function PaymentModal({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor: ThemeColors.black + "66",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.lg,
   },
   container: {
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white,
+    borderRadius: 16,
     padding: ThemeSpacing.xl,
     maxHeight: "95%",
   },
@@ -452,7 +464,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 8,
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
     alignItems: "center",
     justifyContent: "center",
     marginRight: ThemeSpacing.md,
@@ -565,8 +577,8 @@ const styles = StyleSheet.create({
     backgroundColor: ThemeColors.surface,
   },
   paymentMethodCardActive: {
-    borderColor: ThemeColors.emerald,
-    backgroundColor: ThemeColors.emeraldDim,
+    borderColor: ThemeColors.amber,
+    backgroundColor: ThemeColors.amber + "15",
   },
   paymentMethodText: {
     fontSize: 13,
@@ -574,7 +586,7 @@ const styles = StyleSheet.create({
     marginLeft: ThemeSpacing.sm,
   },
   paymentMethodTextActive: {
-    color: ThemeColors.emerald,
+    color: ThemeColors.amber,
   },
   inputContainer: {
     flexDirection: "row",
@@ -599,14 +611,14 @@ const styles = StyleSheet.create({
     paddingVertical: ThemeSpacing.md,
   },
   copyTotalBtn: {
-    backgroundColor: ThemeColors.emeraldDim,
+    backgroundColor: ThemeColors.amber + "15",
     paddingHorizontal: ThemeSpacing.md,
     paddingVertical: ThemeSpacing.sm,
     borderRadius: ThemeRadius.sm,
     marginLeft: ThemeSpacing.sm,
   },
   copyTotalText: {
-    color: ThemeColors.emerald,
+    color: ThemeColors.amber,
     fontSize: 13,
   },
   payBtn: {

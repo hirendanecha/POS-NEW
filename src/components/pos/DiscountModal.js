@@ -196,7 +196,7 @@ export function DiscountModal({ visible, onClose, discount, onApply }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor: ThemeColors.black + "66",
     justifyContent: "center",
     alignItems: "center",
   },

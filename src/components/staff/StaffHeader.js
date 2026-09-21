@@ -1,5 +1,5 @@
 import { CommonHeader } from "@/components/common/CommonHeader";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { StyleSheet } from "react-native";
 
 export function StaffHeader({}) {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: ThemeSpacing.lg,
     paddingVertical: ThemeSpacing.sm,
-    borderRadius: ThemeRadius.xl,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
   },

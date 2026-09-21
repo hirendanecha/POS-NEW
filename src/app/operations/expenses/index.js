@@ -747,7 +747,7 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.45)",
+    backgroundColor: ThemeColors.black + "73",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.xl,
@@ -761,7 +761,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: ThemeColors.border,
     gap: ThemeSpacing.md,
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.1,
     shadowRadius: 12,

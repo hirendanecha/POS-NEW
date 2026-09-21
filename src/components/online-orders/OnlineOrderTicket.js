@@ -67,9 +67,9 @@ export function OnlineOrderTicket({ order, onAction, onItemAction }) {
 
   const getPlatformColor = () => {
     const type = String(order.type || order.platform || "").toLowerCase();
-    if (type.includes("zomato")) return "#E23744";
-    if (type.includes("swiggy")) return "#FC8019";
-    if (type.includes("qr")) return "#8B5CF6";
+    if (type.includes("zomato")) return ThemeColors.zomato;
+    if (type.includes("swiggy")) return ThemeColors.swiggy;
+    if (type.includes("qr")) return ThemeColors.violet;
     return ThemeColors.primary;
   };
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: ThemeColors.borderSubtle,
     overflow: "hidden",
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 8,

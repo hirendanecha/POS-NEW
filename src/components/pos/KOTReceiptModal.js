@@ -80,7 +80,7 @@ export function KOTReceiptModal({ visible, kot, onClose }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.md,
@@ -109,13 +109,13 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: ThemeSpacing.xl,
-    backgroundColor: "#F9F9F9",
+    backgroundColor: ThemeColors.bg,
   },
   receipt: {
     backgroundColor: ThemeColors.white,
     padding: ThemeSpacing.xl,
     borderRadius: ThemeRadius.sm,
-    shadowColor: "#000",
+    shadowColor: ThemeColors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,

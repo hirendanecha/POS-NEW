@@ -1,5 +1,5 @@
 import { Text } from "@/components/ui/Text";
-import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
+import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { Maximize, ZoomIn, ZoomOut } from "lucide-react-native";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
@@ -64,20 +64,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: ThemeSpacing.xs,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     padding: ThemeSpacing.xs,
-    borderRadius: ThemeRadius.full,
+    borderRadius: 100,
     shadowColor: ThemeColors.black,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.15,
-    shadowRadius: 12,
-    elevation: 8,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
     borderWidth: 1,
     borderColor: ThemeColors.border,
   },
   zoomBtn: {
     padding: ThemeSpacing.sm,
-    borderRadius: ThemeRadius.full,
+    borderRadius: 100,
   },
   scaleBtn: {
     flexDirection: "row",
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   scaleText: {
     fontSize: 12,
-    color: ThemeColors.textPrimary,
+    color: ThemeColors.textSecondary,
     fontWeight: "600",
   },
 });

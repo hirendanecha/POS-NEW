@@ -34,8 +34,8 @@ export function InventoryHeader({
                   style={[
                     styles.filterTab,
                     isActive && {
-                      backgroundColor: ThemeColors.emerald,
-                      borderColor: ThemeColors.emerald,
+                      backgroundColor: ThemeColors.amber,
+                      borderColor: ThemeColors.amber,
                     },
                   ]}
                   activeOpacity={0.8}
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   branchTab: {
     paddingHorizontal: ThemeSpacing.md,
     paddingVertical: 6,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
     borderColor: ThemeColors.border,

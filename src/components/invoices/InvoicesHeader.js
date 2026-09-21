@@ -30,9 +30,6 @@ const YEARS = [
 ];
 
 export function InvoicesHeader({
-  isDesktop,
-  navigation,
-  dateString,
   isTodaySelected,
   setIsTodaySelected,
   selectedMonth,
@@ -57,8 +54,8 @@ export function InvoicesHeader({
               style={[
                 styles.filterTab,
                 isTodaySelected && {
-                  backgroundColor: ThemeColors.emerald,
-                  borderColor: ThemeColors.emerald,
+                  backgroundColor: ThemeColors.amber,
+                  borderColor: ThemeColors.amber,
                 },
               ]}
               activeOpacity={0.8}

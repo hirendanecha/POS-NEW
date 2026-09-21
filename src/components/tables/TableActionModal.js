@@ -1,8 +1,7 @@
-import React from "react";
 import { Text } from "@/components/ui/Text";
+import React from "react";
 
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
-import { showAlert } from "@/utils/alert";
 import {
   Ban,
   CalendarDays,
@@ -16,14 +15,13 @@ import {
   X,
 } from "lucide-react-native";
 import {
+  ActivityIndicator,
   Modal,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from "react-native";
-import QRCode from "react-native-qrcode-svg";
 
 export function TableActionModal({
   visible,
@@ -74,7 +72,7 @@ export function TableActionModal({
     setIsSubmitting(true);
     try {
       onUpdateStatus(table.id, "Occupied"); // Keeps occupied or update to some billed state
-      if (typeof printReceipt === 'function') {
+      if (typeof printReceipt === "function") {
         await printReceipt({
           type: "bill",
           table: table.name,
@@ -167,47 +165,7 @@ export function TableActionModal({
                 Capacity: {table.capacity} Persons
               </Text>
             </View>
-            <View
-              style={{
-                alignItems: "center",
-                marginRight: 16,
-                flexDirection: "row",
-                gap: 4,
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 4,
-                  backgroundColor: ThemeColors.blueDim,
-                  paddingHorizontal: 8,
-                  paddingVertical: 4,
-                  borderRadius: ThemeRadius.sm,
-                  borderWidth: 1,
-                  borderColor: ThemeColors.blue,
-                }}
-                onPress={() => {
-                  showAlert("Print QR", "QR code printed successfully!");
-                }}
-              >
-                <Printer size={14} color={ThemeColors.blue} />
-                <Text
-                  weight="semibold"
-                  style={{ fontSize: 12, color: ThemeColors.blue }}
-                >
-                  Print QR
-                </Text>
-              </TouchableOpacity>
-              <View
-                style={{ backgroundColor: "#fff", padding: 4, borderRadius: 8 }}
-              >
-                <QRCode
-                  value={`https://demo.pos.com/order/${table.id}`}
-                  size={100}
-                />
-              </View>
-            </View>
+
             <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
               <X size={20} color={ThemeColors.textSecondary} />
             </TouchableOpacity>
@@ -262,13 +220,16 @@ export function TableActionModal({
                     style={[
                       styles.secondaryBtn,
                       { flex: 1, backgroundColor: ThemeColors.blueDim },
-                      isSubmitting && { opacity: 0.7 }
+                      isSubmitting && { opacity: 0.7 },
                     ]}
                     onPress={handlePrintBill}
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
-                      <ActivityIndicator size="small" color={ThemeColors.blue} />
+                      <ActivityIndicator
+                        size="small"
+                        color={ThemeColors.blue}
+                      />
                     ) : (
                       <Printer size={18} color={ThemeColors.blue} />
                     )}
@@ -338,7 +299,7 @@ export function TableActionModal({
                 {/* Available Status Logic */}
                 {isAvailable && (
                   <View style={styles.statusGrid}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                       style={[
                         styles.primaryBtn,
                         {
@@ -357,7 +318,7 @@ export function TableActionModal({
                       >
                         Take Order
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     <TouchableOpacity
                       style={[
@@ -385,6 +346,33 @@ export function TableActionModal({
                         Mark Occupied
                       </Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={[
+                        styles.statusBtn,
+                        {
+                          flex: 1,
+                          backgroundColor: ThemeColors.redDim,
+                          borderColor: ThemeColors.red,
+                        },
+                      ]}
+                      onPress={() => {
+                        onUpdateStatus(table.id, "Reserved");
+                        onClose();
+                      }}
+                    >
+                      <CalendarDays size={18} color={ThemeColors.red} />
+                      <Text
+                        style={[
+                          styles.statusBtnText,
+                          { color: ThemeColors.red },
+                        ]}
+                        adjustsFontSizeToFit
+                        numberOfLines={2}
+                      >
+                        Mark Reserved
+                      </Text>
+                    </TouchableOpacity>
                   </View>
                 )}
 
@@ -407,60 +395,65 @@ export function TableActionModal({
                       </Text>
                     </TouchableOpacity>
 
-                  <View style={[styles.statusGrid, { marginTop: ThemeSpacing.md }]}>
-                    <TouchableOpacity
+                    <View
                       style={[
-                        styles.statusBtn,
-                        {
-                          backgroundColor: ThemeColors.blueDim,
-                          borderColor: ThemeColors.blue,
-                        },
+                        styles.statusGrid,
+                        { marginTop: ThemeSpacing.md },
                       ]}
-                      onPress={() => {
-                        onUpdateStatus(table.id, "Occupied");
-                        onClose();
-                      }}
                     >
-                      <Clock size={18} color={ThemeColors.blue} />
-                      <Text
+                      <TouchableOpacity
                         style={[
-                          styles.statusBtnText,
-                          { color: ThemeColors.blue, textAlign: "center" },
+                          styles.statusBtn,
+                          {
+                            backgroundColor: ThemeColors.blueDim,
+                            borderColor: ThemeColors.blue,
+                          },
                         ]}
-                        adjustsFontSizeToFit
-                        numberOfLines={2}
+                        onPress={() => {
+                          onUpdateStatus(table.id, "Occupied");
+                          onClose();
+                        }}
                       >
-                        Guest Arrived{"\n"}(No Order)
-                      </Text>
-                    </TouchableOpacity>
+                        <Clock size={18} color={ThemeColors.blue} />
+                        <Text
+                          style={[
+                            styles.statusBtnText,
+                            { color: ThemeColors.blue, textAlign: "center" },
+                          ]}
+                          adjustsFontSizeToFit
+                          numberOfLines={2}
+                        >
+                          Guest Arrived{"\n"}(No Order)
+                        </Text>
+                      </TouchableOpacity>
 
-                    <TouchableOpacity
-                      style={[
-                        styles.statusBtn,
-                        {
-                          backgroundColor: ThemeColors.redDim,
-                          borderColor: ThemeColors.red,
-                        },
-                      ]}
-                      onPress={() => {
-                        onUpdateStatus(table.id, "Available");
-                        onClose();
-                      }}
-                    >
-                      <Trash2 size={18} color={ThemeColors.red} />
-                      <Text
+                      <TouchableOpacity
                         style={[
-                          styles.statusBtnText,
-                          { color: ThemeColors.red, textAlign: "center" },
+                          styles.statusBtn,
+                          {
+                            backgroundColor: ThemeColors.redDim,
+                            borderColor: ThemeColors.red,
+                          },
                         ]}
-                        adjustsFontSizeToFit
-                        numberOfLines={2}
+                        onPress={() => {
+                          onUpdateStatus(table.id, "Available");
+                          onClose();
+                        }}
                       >
-                        Cancel Reservation
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </>
+                        <Trash2 size={18} color={ThemeColors.red} />
+                        <Text
+                          style={[
+                            styles.statusBtnText,
+                            { color: ThemeColors.red, textAlign: "center" },
+                          ]}
+                          adjustsFontSizeToFit
+                          numberOfLines={2}
+                        >
+                          Cancel Reservation
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </>
                 )}
 
                 {/* Occupied (No Order) Logic */}
@@ -511,7 +504,8 @@ export function TableActionModal({
             )}
 
             {/* Unmerge Table Option */}
-            {(table.originalTables?.length > 0 || table.merged_tables?.length > 0) && (
+            {(table.originalTables?.length > 0 ||
+              table.merged_tables?.length > 0) && (
               <TouchableOpacity
                 style={[
                   styles.secondaryBtn,
@@ -547,7 +541,7 @@ export function TableActionModal({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80", // 50% opacity
     justifyContent: "center",
     alignItems: "center",
   },

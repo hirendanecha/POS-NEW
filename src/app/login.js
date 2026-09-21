@@ -107,7 +107,7 @@ export default function LoginScreen() {
               <View
                 style={[
                   StyleSheet.absoluteFillObject,
-                  { backgroundColor: "rgba(15, 23, 42, 0.8)" },
+                  { backgroundColor: ThemeColors.primary + "CC" },
                 ]}
               />
 

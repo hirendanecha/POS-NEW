@@ -547,7 +547,7 @@ export function MenuItemWizardModal({ visible, onClose, onSave, initialData }) {
                     }
                     trackColor={{
                       false: ThemeColors.border,
-                      true: ThemeColors.emerald,
+                      true: ThemeColors.amber,
                     }}
                   />
                 </View>
@@ -806,14 +806,14 @@ export function MenuItemWizardModal({ visible, onClose, onSave, initialData }) {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: ThemeColors.black + "80",
     justifyContent: "center",
     alignItems: "center",
     padding: ThemeSpacing.md,
   },
   container: {
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
+    backgroundColor: ThemeColors.white,
+    borderRadius: 16,
     maxHeight: "90%",
     overflow: "hidden",
     shadowColor: ThemeColors.black,
@@ -866,11 +866,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stepDotActive: {
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
   },
   stepNum: {
     fontSize: 10,
-    color: ThemeColors.textMuted,
+    color: ThemeColors.white,
   },
   stepText: {
     fontSize: 12,
@@ -878,7 +878,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   stepTextActive: {
-    color: ThemeColors.emerald,
+    color: ThemeColors.amber,
     fontWeight: "bold",
   },
   stepLine: {
@@ -888,7 +888,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   stepLineActive: {
-    backgroundColor: ThemeColors.emerald,
+    backgroundColor: ThemeColors.amber,
   },
   contentScroll: {
     flexShrink: 1,
@@ -959,7 +959,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: ThemeColors.border,
     borderRadius: ThemeRadius.md,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "80",
   },
   foodTypeChipActive: {
     borderColor: ThemeColors.primary,
@@ -978,7 +978,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: ThemeColors.surfaceElevated,
+    backgroundColor: ThemeColors.white + "80",
     padding: ThemeSpacing.md,
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
@@ -986,7 +986,7 @@ const styles = StyleSheet.create({
   },
   customAddonGroupContainer: {
     padding: ThemeSpacing.md,
-    backgroundColor: ThemeColors.surfaceElevated,
+    backgroundColor: ThemeColors.white + "80",
     borderRadius: ThemeRadius.md,
     borderWidth: 1,
     borderColor: ThemeColors.border,
@@ -1020,7 +1020,7 @@ const styles = StyleSheet.create({
     padding: ThemeSpacing.xl,
     borderTopWidth: 1,
     borderTopColor: ThemeColors.border,
-    backgroundColor: ThemeColors.surface,
+    backgroundColor: ThemeColors.white + "B3",
   },
   btnSecondary: {
     flexDirection: "row",
