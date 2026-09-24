@@ -50,8 +50,9 @@ export function InvoicesSummaryCards({ metrics }) {
       <SummaryCard
         title={stat.title}
         primary={stat.value}
-        icon={<stat.icon size={16} color={stat.color} />}
-        badge={stat.changeLabel ? { label: stat.changeLabel, positive: stat.positive } : undefined}
+        icon={<stat.icon size={16} color={stat.color} strokeWidth={2} />}
+        badge={stat.changeLabel}
+        color={stat.color}
       />
     </View>
   ));

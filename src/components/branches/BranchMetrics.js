@@ -12,10 +12,11 @@ export function BranchMetrics({ totalBranches, activeBranches, totalRevenue }) {
   const cards = [
     <View key="total" style={isScrollable ? { width: cardWidth } : { flex: 1 }}>
       <SummaryCard
-        icon={<Building2 size={18} color={ThemeColors.blue} />}
+        icon={<Building2 size={16} color={ThemeColors.blue} strokeWidth={2} />}
         title="Total Branches"
         primary={String(totalBranches)}
-        badge={{ label: "+1 New", positive: true }}
+        badge="+1 New"
+        color={ThemeColors.blue}
       >
         <MetricRow
           label="Active Locations"
@@ -34,10 +35,11 @@ export function BranchMetrics({ totalBranches, activeBranches, totalRevenue }) {
       style={isScrollable ? { width: cardWidth } : { flex: 1 }}
     >
       <SummaryCard
-        icon={<Activity size={18} color={ThemeColors.emerald} />}
+        icon={<Activity size={16} color={ThemeColors.emerald} strokeWidth={2} />}
         title="Active Branches"
         primary={String(activeBranches)}
-        badge={{ label: "98% Uptime", positive: true }}
+        badge="98% Uptime"
+        color={ThemeColors.emerald}
       >
         <MetricRow label="System Status" value="Healthy" highlight />
         <MetricRow label="Sync" value="Up to date" />
@@ -49,10 +51,11 @@ export function BranchMetrics({ totalBranches, activeBranches, totalRevenue }) {
       style={isScrollable ? { width: cardWidth } : { flex: 1 }}
     >
       <SummaryCard
-        icon={<TrendingUp size={18} color={ThemeColors.emerald} />}
+        icon={<TrendingUp size={16} color={ThemeColors.emerald} strokeWidth={2} />}
         title="Total Revenue"
         primary={`₹${(totalRevenue / 1000).toFixed(1)}K`}
-        badge={{ label: "+12.5%", positive: true }}
+        badge="+12.5%"
+        color={ThemeColors.emerald}
       >
         <MetricRow
           label="This Week"

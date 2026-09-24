@@ -19,8 +19,9 @@ export function InventorySummaryCards({ metrics }) {
       key="total-stock"
       title="Total Stock Value"
       primary={`₹${(metrics.totalValue / 1000).toFixed(1)}K`}
-      icon={<Package size={18} color={ThemeColors.blue} />}
-      badge={{ label: "+5.2%", positive: true }}
+      icon={<Package size={16} color={ThemeColors.blue} strokeWidth={2} />}
+      badge="+5.2%"
+      color={ThemeColors.blue}
     >
       <MetricRow label="Total Items" value={String(metrics.totalItems)} />
     </SummaryCard>,
@@ -29,8 +30,9 @@ export function InventorySummaryCards({ metrics }) {
       key="low-stock"
       title="Low Stock Alerts"
       primary={String(metrics.lowStockCount)}
-      icon={<AlertTriangle size={18} color={ThemeColors.amber} />}
-      badge={{ label: "Needs Restock", positive: false }}
+      icon={<AlertTriangle size={16} color={ThemeColors.amber} strokeWidth={2} />}
+      badge="Needs Restock"
+      color={ThemeColors.amber}
     >
       <MetricRow label="Needs Attention" value="Check Replenishment" />
     </SummaryCard>,
@@ -39,7 +41,8 @@ export function InventorySummaryCards({ metrics }) {
       key="out-of-stock"
       title="Out of Stock"
       primary={String(metrics.outOfStockCount)}
-      icon={<Settings2 size={18} color={ThemeColors.red} />}
+      icon={<Settings2 size={16} color={ThemeColors.red} strokeWidth={2} />}
+      color={ThemeColors.red}
     >
       <MetricRow
         label="Zero Quantity"
@@ -53,7 +56,8 @@ export function InventorySummaryCards({ metrics }) {
       key="quarantine"
       title="Quarantine"
       primary={String(metrics.quarantineCount)}
-      icon={<ClipboardList size={18} color={ThemeColors.purple} />}
+      icon={<ClipboardList size={16} color={ThemeColors.purple} strokeWidth={2} />}
+      color={ThemeColors.purple}
     >
       <MetricRow label="Awaiting Inspection" value="Hold" />
     </SummaryCard>,

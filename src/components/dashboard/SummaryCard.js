@@ -2,23 +2,6 @@ import { Text } from "@/components/ui/Text";
 import { ThemeColors, ThemeRadius, ThemeSpacing } from "@/theme/theme";
 import { StyleSheet, View } from "react-native";
 
-// ─── Growth Badge ─────────────────────────────────────────────────────────────
-function GrowthBadge({ label, positive }) {
-  const bg = positive ? ThemeColors.emeraldDim : ThemeColors.redDim;
-  const color = positive ? ThemeColors.emerald : ThemeColors.red;
-  const icon = positive ? "↗" : "↘";
-  return (
-    <View style={styles.growthBadgeContainer}>
-      <View style={[styles.growthBadge, { backgroundColor: bg }]}>
-        <Text weight="bold" style={[styles.growthText, { color }]}>
-          {label} {icon}
-        </Text>
-      </View>
-      <Text weight="medium" style={styles.growthSubtext}>From Last Month</Text>
-    </View>
-  );
-}
-
 // ─── Metric Row ──────────────────────────────────────────────────────────────
 export function MetricRow({ label, value, highlight, arrow }) {
   const arrowChar = arrow === "up" ? "↑" : arrow === "down" ? "↓" : null;
@@ -44,94 +27,124 @@ export function MetricRow({ label, value, highlight, arrow }) {
 }
 
 // ─── Summary Card ─────────────────────────────────────────────────────────────
-export function SummaryCard({ icon, title, primary, badge, children }) {
+export function SummaryCard({ icon, title, primary, badge, color = ThemeColors.accent, children }) {
   return (
-    <View style={styles.card}>
-      <View style={styles.body}>
-        <View style={styles.headerRow}>
-          <View style={styles.titleWrap}>
-            <View style={styles.iconWrap}>{icon}</View>
-            <Text weight="bold" style={styles.cardTitle}>{title}</Text>
-          </View>
-        </View>
+    <View style={styles.statCard}>
+      {/* Decorative blob */}
+      <View style={[styles.statBlob, { backgroundColor: color }]} />
 
-        <View style={styles.contentRow}>
-          <Text weight="bold" style={styles.primary}>{primary}</Text>
-          {badge && (
-            <GrowthBadge label={badge.label} positive={badge.positive} />
-          )}
+      {/* Top row: icon pill + title */}
+      <View style={styles.statTopRow}>
+        <View style={[styles.iconPill, { backgroundColor: ThemeColors.bg }]}>
+          {icon}
         </View>
-
-        {children && (
-          <>
-            <View style={styles.divider} />
-            {children}
-          </>
-        )}
+        <Text style={styles.statTitle} numberOfLines={1}>
+          {title}
+        </Text>
       </View>
+
+      {/* Bottom row: value */}
+      <View style={styles.statBottomRow}>
+        <Text style={styles.statValue}>{primary}</Text>
+      </View>
+
+      {badge && (
+        <View style={styles.subtextContainer}>
+          <View style={styles.infoIcon}>
+            <Text style={styles.infoIconText}>i</Text>
+          </View>
+          <Text style={styles.subtext}>{badge.label || badge}</Text>
+        </View>
+      )}
+
+      {children && (
+        <>
+          <View style={styles.divider} />
+          {children}
+        </>
+      )}
     </View>
   );
 }
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: ThemeColors.surface,
-    borderRadius: ThemeRadius.lg,
-    minWidth: 130,
+  statCard: {
+    flex: 1,
+    minWidth: 130, // from SummaryCard (DashboardStatsGrid had 180, we keep it smaller for flex)
+    backgroundColor: ThemeColors.white + "B3", // 70% opacity white
+    padding: 20,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: ThemeColors.border,
-  },
-  body: {
-    padding: ThemeSpacing.md,
-  },
-  headerRow: {
-    flexDirection: "row",
+    shadowColor: ThemeColors.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+    overflow: "hidden",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: ThemeSpacing.lg,
   },
-  titleWrap: {
+  statBlob: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 128,
+    height: 128,
+    borderBottomLeftRadius: 128,
+    opacity: 0.05,
+  },
+  statTopRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: ThemeSpacing.sm,
+    gap: 8,
+    marginBottom: 16,
   },
-  iconWrap: {
-    width: 24,
-    height: 24,
-    borderRadius: ThemeRadius.sm,
-    backgroundColor: ThemeColors.surfaceElevated,
-    alignItems: "center",
+  iconPill: {
+    width: 32,
+    height: 32,
+    borderRadius: 8,
     justifyContent: "center",
+    alignItems: "center",
   },
-  cardTitle: {
+  statTitle: {
     fontSize: 14,
+    fontWeight: "bold",
     color: ThemeColors.textPrimary,
   },
-  contentRow: {
+  statBottomRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "flex-end",
+    justifyContent: "space-between",
   },
-  primary: {
+  statValue: {
     fontSize: 24,
+    fontWeight: "bold",
     color: ThemeColors.textPrimary,
   },
-  growthBadgeContainer: {
-    alignItems: "flex-end",
-    gap: 2,
+  subtextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: 8,
   },
-  growthBadge: {
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 4,
+  infoIcon: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    backgroundColor: ThemeColors.bg,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  growthText: {
-    fontSize: 10,
-  },
-  growthSubtext: {
+  infoIconText: {
     fontSize: 9,
-    color: ThemeColors.textMuted,
+    fontWeight: "bold",
+    color: ThemeColors.textSecondary,
+  },
+  subtext: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: ThemeColors.textSecondary,
   },
   divider: {
     height: 1,
