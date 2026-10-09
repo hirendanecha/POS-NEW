@@ -1,6 +1,6 @@
 import { ThemeColors } from "@/theme/theme";
 import { Clock, ShoppingBag, UtensilsCrossed } from "lucide-react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function DashboardRunningKOTs({ runningOrders }) {
   return (
@@ -8,7 +8,11 @@ export default function DashboardRunningKOTs({ runningOrders }) {
       <View style={styles.mainCard}>
         <Text style={styles.cardTitle}>Running KOTs</Text>
         {runningOrders.length > 0 ? (
-          <View style={styles.kotGrid}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.kotGrid}
+          >
             {runningOrders.map((order) => {
               let items = [];
               try {
@@ -129,7 +133,7 @@ export default function DashboardRunningKOTs({ runningOrders }) {
                 </View>
               );
             })}
-          </View>
+          </ScrollView>
         ) : (
           <View style={styles.placeholderBox}>
             <Text style={styles.placeholderText}>No running orders</Text>
@@ -181,8 +185,8 @@ const styles = StyleSheet.create({
   },
   kotGrid: {
     flexDirection: "row",
-    flexWrap: "wrap",
     gap: 16,
+    paddingBottom: 4,
   },
   kotCard: {
     width: 280, // Fixed width for masonry/grid look
