@@ -2,7 +2,12 @@ import { Text } from "@/components/ui/Text";
 import { ThemeColors, ThemeSpacing } from "@/theme/theme";
 import { StyleSheet, View } from "react-native";
 
-export function TablesLegend({ isSmallScreen, availableCount, dineInCount }) {
+export function TablesLegend({
+  isSmallScreen,
+  availableCount,
+  dineInCount,
+  reservedCount,
+}) {
   return (
     <View
       style={[
@@ -34,6 +39,12 @@ export function TablesLegend({ isSmallScreen, availableCount, dineInCount }) {
           style={[styles.legendDot, { backgroundColor: ThemeColors.blue }]}
         />
         <Text style={styles.legendText}>Occupied: {dineInCount}</Text>
+      </View>
+      <View style={styles.legendItem}>
+        <View
+          style={[styles.legendDot, { backgroundColor: ThemeColors.red }]}
+        />
+        <Text style={styles.legendText}>Reserved: {reservedCount}</Text>
       </View>
     </View>
   );
