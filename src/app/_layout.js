@@ -21,6 +21,10 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { createRequire } from 'module';
+
+var require = createRequire(import.meta.url);
+var module = { exports: {} };
 
 export default function RootLayout() {
   let [fontsLoaded] = useFonts({
@@ -93,4 +97,4 @@ export default function RootLayout() {
       </PersistGate>
     </Provider>
   );
-}
+};
